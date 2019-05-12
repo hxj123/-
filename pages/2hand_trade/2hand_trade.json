@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#c2492e",
+  "navigationBarTitleText": "西南旧志",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "scroll-view-refresh": "/component/scroll-view-refresh/index"
+  }
+}

@@ -1,0 +1,19 @@
+<view class='background'>
+  <view>
+    <image src='https://jianghuling.top/images/feedback.png' style='display:flex;height:139rpx;width:234rpx'></image>
+  </view>
+  <view class='blocks'>
+    <view class='block1' catchtap='toFunc' data-index='1'>
+      <image src='https://jianghuling.top/images/feedback_reportWords.png'></image>
+    </view>
+    <view class='block2' catchtap='toFunc' data-index='2'>
+      <image src='https://jianghuling.top/images/feedback_tradeDispute.png'></image>
+    </view>
+    <view class='block3' catchtap='toFunc' data-index='3'>
+      <image src='https://jianghuling.top/images/feedback_suggestion.png'></image>
+    </view>
+    <view class='block4' catchtap='toFunc' data-index='4'>
+      <image src='https://jianghuling.top/images/feedback_contack.png'></image>
+    </view>
+  </view>
+</view>

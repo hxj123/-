@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/loading/loading",
+    "pages/order_setting/order_setting",
+    "pages/suggestion/suggestion",
+    "pages/phone_binding/phone_binding",
+    "pages/studentid_binding/studentid_binding",
+    "pages/take_express/take_express",
+    "pages/index/index",
+    "pages/accout_manage/accout_manage",
+    "pages/user_info/user_info",
+    "pages/mts_recovery/mts_recovery",
+    "pages/my/my",
+    "pages/logs/logs",
+    "pages/contact_us/contact_us",
+    "pages/fee_account/fee_account",
+    "pages/customer_service/customer_service",
+    "pages/2hand_trade/2hand_trade",
+    "pages/book_detail/book_detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#c2492e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "image/main.png",
+        "selectedIconPath": "image/selected_main.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "image/person.png",
+        "selectedIconPath": "image/selected_person.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

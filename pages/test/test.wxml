@@ -1,0 +1,36 @@
+<view class="container">
+  <view class='tab_header'>
+    <view class='header'>
+        <view class='{{currentTab==0?"on":""}}' data-current="0" bindtap='tab'>寻人拿快递</view>
+        <view class='{{currentTab==1?"on":""}}' data-current="1" bindtap='tab'>我要拿快递</view>
+        <view class='{{currentTab==2?"on":""}}' data-current="2" bindtap='tab'>我的订单</view>
+    </view>
+  </view>
+  <view hidden='{{currentTab!=0}}' class='page'>
+    <view class='item' wx:for="{{list}}" wx:key="unique">
+      <view class='item-name'>名称:{{item.name}}</view>
+      <view class='item-box'>
+          <view class='item-status'>状态:{{item.status}}</view>
+          <view class='item-time'>时间:{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+  <view hidden='{{currentTab!=1}}' class='page'>
+    <view class='item' wx:for="{{list}}" wx:key="unique">
+      <view class='item-name'>名称:{{item.name}}</view>
+      <view class='item-box'>
+          <view class='item-status'>状态:{{item.status}}</view>
+          <view class='item-time'>时间:{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+  <view hidden='{{currentTab!=2}}' class='page'>
+    <view class='item' wx:for="{{list}}" wx:key="unique">
+      <view class='item-name'>名称:{{item.name}}</view>
+      <view class='item-box'>
+          <view class='item-status'>状态:{{item.status}}</view>
+          <view class='item-time'>时间:{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+</view>  

@@ -1,0 +1,277 @@
+<wxs module="util" src="../../utils/util.wxs"></wxs>
+<view class="container">
+  <view class='tab'>
+    <view class='tab-header'>
+      <view class='tab-nav'>
+          <view class='{{currentTab==0?"on":""}}' data-current="0" bindtap='tab'>寻人拿快递</view>
+          <view class='{{currentTab==1?"on":""}}' data-current="1" bindtap='tab'>我要拿快递</view>
+          <view class='{{currentTab==2?"on":""}}' data-current="2" bindtap='tab'>我的订单</view>
+      </view>
+    </view>
+    <swiper class='tab-box' current="{{currentTab}}" bindchange="eventchange">
+      <swiper-item>
+        <scroll-view scroll-y>
+          <view class='centerColumn'>
+            <view class='express_block'>
+              <picker bindchange="bindPickerChange1" value="{{express_type_index}}" range="{{express_type}}">
+                <view class='express_item'>
+                  <text class='text1'>快递品牌</text>
+                  <view class='picker_value'>
+                    <text  class='text2'>{{express.type}}</text>
+                    <image src='../../image/enter.png'></image>
+                  </view>
+                </view>
+              </picker>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>取货地点</text>
+                <input value='{{express.take_address}}' maxlength='20' placeholder="请输入取货地点" data-index='0' bindinput='inputChange'></input>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>送达地址</text>
+                <input value='{{express.delivery_address}}' maxlength='20' placeholder="请输入送达地址" data-index='1' bindinput='inputChange'></input>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>送达时间</text>
+                <input value='{{express.deliveryTime}}' maxlength='20' placeholder='请描述接单人将快递送达时间' data-index='7' bindinput='inputChange'></input>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>发布时长</text>
+                <view class='picker_value'>
+                  <picker bindchange='bindDateChange' value='{{currentIndex}}' range='{{autoCancelTime}}'>
+                    <text style='text-decoration:underline;'>{{autoCancelTime[currentIndex]}}</text>小时
+                  </picker>
+                <!-->
+                  <picker bindchange="bindDateChange1" value="time" mode="time" start="00:00" end="23:59">
+                    <text class='text2'>{{express.start_time}}</text>
+                  </picker>
+                  <text style='color:#666' decode="true">&nbsp;-&nbsp;</text>
+                  <picker bindchange="bindDateChange2" value="time" mode="time" start="{{express.start_time}}" end="23:59">
+                    <text class='text2'>{{express.end_time}}</text>
+                  </picker>
+                <-->
+                </view>
+              </view>
+            </view>
+            <view class='express_block'>
+              <picker bindchange="bindPickerChange2" value="{{weight_type_index}}" range="{{weight_type}}">
+                <view class='express_item'>
+                  <text class='text1'>重量级别</text>
+                  <view class='picker_value'>
+                    <text  class='text2'>{{express.weight}}</text>
+                    <image src='../../image/enter.png'></image>
+                  </view>
+                </view>
+              </picker>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>收货人姓名</text>
+                <input value='{{express.name}}' maxlength='10' placeholder="请输入你的姓名" data-index='2' bindinput='inputChange'/>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>收货人电话</text>
+                <input value='{{express.phone}}' maxlength='11' placeholder="请输入你的电话" data-index='3' bindinput='inputChange'/>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>取货码</text>
+                <input value='{{express.number}}' maxlength='10' placeholder="请输入短信取货码" data-index='4' bindinput='inputChange'/>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>赏金</text>
+                <view class='money'>
+                  <input value="{{express.bounty}}" maxlength='3' data-index='5' bindinput='inputChange'/>元
+                </view>
+              </view>
+            </view>
+            <view class='express_block'>
+              <view class='express_item'>
+                <text class='text1'>备注</text>
+                <input value='{{express.remark}}' maxlength='30' placeholder="请在此处填写备注" data-index='6' bindinput='inputChange'/>
+              </view>
+            </view>
+            <view style='width:91%;margin-top:20rpx'><text style='font-size:31rpx;'>*注：1.发布时长：订单发布X小时后若未被接单则自动取消。2.姓名，手机号，取件码只有接单人可见。</text></view>
+            <image src='../../image/button1.png' class='button1' mode='widthFix' catchtap='sumbit'></image>
+          </view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y bindscrolltoupper="evupper" bindscrolltolower="evlower" upper-threshold='0' lower-threshold='10'>
+          <view class='tip_block' hidden='{{isHiddenTipBlock1}}'>
+            {{tipBlockContent1}}
+          </view>
+          <view class='centerColumn'>
+            <view class='express_order' wx:key='express_order' wx:for-item="item" wx:for="{{express_order_list}}" data-index="{{index}}" bindtap='itemClick' data-modal='hiddenModal1'>
+              <view class='info_left'>
+                <view>{{util.formatString(item.destination)}} {{item.expressType}} {{item.goodsWeight}}</view>
+                <view style='color:#aaa'>{{item.releaseTime}} 发布</view>
+              </view>
+              <view class='centerRow'>
+                <text>{{item.reward}}元</text>
+                <image hidden='{{item.orderState != 0}}' src='../../image/accept.png'></image>
+                <image hidden='{{item.orderState == 0}}' src='../../image/accepted.png'></image>
+              </view>
+            </view>
+          </view>
+          <view class="weui-loadmore" hidden="{{isHideLoadMore1}}">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <view class='my_order_header'>
+            <view class="{{myCurrentTab==0?'lon':''}}" data-current="0" catchtap='myTab'>我接受的</view>
+            <view class="{{myCurrentTab==1?'lon':''}}" data-current="1" catchtap='myTab'>我发放的</view>
+        </view>
+        <view class='my_order_content'>
+          <scroll-view scroll-y hidden="{{myCurrentTab==1}}" bindscrolltoupper="evupper1" bindscrolltolower="evlower1"  upper-threshold='0' lower-threshold='10'>
+            <view class='tip_block' hidden='{{isHiddenTipBlock2}}'>
+              {{tipBlockContent2}}
+            </view>
+            <view class='centerColumn'>
+              <view wx:key='express_accept' class='express_order' wx:for-item="item" wx:for="{{my_accept_list}}">
+                <view class='info_left'>
+                  <view>{{util.formatString(item.destination)}} {{item.expressType}} {{item.goodsWeight}}</view>
+                  <view style='color:#aaa'>{{item.releaseTime}} 发布</view>
+                </view>
+                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+              </view>
+            </view>
+            <view class="weui-loadmore" hidden="{{isHideLoadMore2}}">
+              <view class="weui-loading"></view>
+              <view class="weui-loadmore__tips">正在加载</view>
+            </view>
+          </scroll-view>
+          <scroll-view scroll-y hidden="{{myCurrentTab==0}}" bindscrolltoupper="evupper2" bindscrolltolower="evlower2" upper-threshold='0' lower-threshold='10'>
+            <view class='tip_block' hidden='{{isHiddenTipBlock3}}'>
+              {{tipBlockContent3}}
+            </view>
+            <view class='centerColumn'>
+              <view wx:key='express_release' class='express_order' wx:for-item="item" wx:for="{{my_release_list}}" data-index="{{index}}" bindtap=''>
+                <view class='info_left'>
+                  <view>{{util.formatString(item.destination)}} {{item.expressType}} {{item.goodsWeight}}</view>
+                  <view style='color:#aaa'>{{item.releaseTime}} 发布</view>
+                </view>
+                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix' catchtap='releaseButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+              </view>
+            </view>
+            <view class="weui-loadmore" hidden="{{isHideLoadMore3}}">
+              <view class="weui-loading"></view>
+              <view class="weui-loadmore__tips">正在加载</view>
+            </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+  </swiper>
+  </view>
+  <modal wx:if="{{hiddenModal1}}" confirm-text="" cancel-text="">
+    <view class='modal_container'>
+      <text>快递品牌： {{clickItem.expressType}}</text>
+      <text>赏金：{{clickItem.reward}}元</text>
+      <text>重量：{{clickItem.goodsWeight}}</text>
+      <text>送达地点：{{clickItem.destination}}</text>
+      <text>取货地址：{{clickItem.takeAddress}}</text>
+      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note}}</text>
+      <view class='modal_button'>
+        <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal1'></image>
+        <image src='../../image/accept_button.png' catchtap='acceptOrder' data-id='{{clickItem.orderId}}' data-modal='hiddenModal1' data-index='{{clickItem.index}}'></image>
+      </view>
+    </view>
+  </modal>
+  <modal wx:if="{{hiddenModal2}}" confirm-text="" cancel-text="">
+    <view class='modal_container'>
+      <text>自动取消时间：{{clickItem.autoCancelTime}}</text>
+      <text>快递品牌： {{clickItem.expressType}}</text>
+      <text>赏金：{{clickItem.reward}}元</text>
+      <text>送达地点：{{clickItem.destination}}</text>
+      <text>取货地址：{{clickItem.takeAddress}}</text>
+      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <view style='display:flex;align-items: center'>
+        <text style='margin-bottom:0px'>联系电话：{{clickItem.hostPhone}}</text>
+        <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{clickItem.hostPhone}}' catchtap='callPhone'></image>
+      </view>
+      <text hidden='{{clickItem.orderState==2}}' style='margin-top:10px;'><text style='font-weight:bold'>失败原因：</text>{{util.getReason(clickItem.orderState)}}</text>
+      <view class='modal_button'>
+        <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal2'></image>
+        <image src='../../image/delete_task.png' catchtap='deleteOrder' data-id='{{clickItem.orderId}}' data-modal='hiddenModal2'></image>
+      </view>
+    </view>
+  </modal>
+  <modal wx:if="{{hiddenModal3}}" confirm-text="" cancel-text="">
+    <view class='modal_container'>
+      <!--><text>自动取消时间：{{clickItem.autoCancelTime}}</text><-->
+      <text>快递品牌： {{clickItem.expressType}}</text>
+      <text>赏金：{{clickItem.reward}}元</text>
+      <text>重量：{{clickItem.goodsWeight}}</text>
+      <text>送达地点：{{clickItem.destination}}</text>
+      <text>取货地址：{{clickItem.takeAddress}}</text>
+      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货码：{{clickItem.goodsCode}}</text>
+      <text>取货姓名：{{clickItem.hostName}}</text>
+      <view style='display:flex;align-items: center'>
+        <text style='margin-bottom:0px'>联系电话：{{clickItem.hostPhone}}</text>
+        <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{clickItem.hostPhone}}' catchtap='callPhone'></image>
+      </view>
+      <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
+      <view class='modal_button'>
+        <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal3'></image>
+        <image src='../../image/confirmArrive_button.png' catchtap='arriveOrder' data-id='{{clickItem.orderId}}' data-modal='hiddenModal3'></image>
+      </view>
+    </view>
+  </modal>
+  <modal wx:if="{{hiddenModal4}}" confirm-text="" cancel-text="">
+    <view class='modal_container'>
+      <text>自动取消时间：{{clickItem.autoCancelTime}}</text>
+      <text>快递品牌： {{clickItem.expressType}}</text>
+      <text>赏金：{{clickItem.reward}}元</text>
+      <text>重量：{{clickItem.goodsWeight}}</text>
+      <text>送达地点：{{clickItem.destination}}</text>
+      <text>取货地址：{{clickItem.takeAddress}}</text>
+      <view style='display:flex;align-items: center'>
+        <text style='margin-bottom:0px'>接单人电话：{{clickItem.takerPhone}}</text>
+        <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{clickItem.takerPhone}}' catchtap='callPhone'></image>
+      </view>
+      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
+      <view class='modal_button'>
+        <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal4'></image>
+        <image src='../../image/cancelOrder_button.png' catchtap='cancelOrder' data-id='{{clickItem.orderId}}' data-state='{{clickItem.orderState}}'></image>
+        <!-- <image src='../../image/confirmTake_button.png' catchtap='confirmOrder' data-id='{{clickItem.orderId}}' data-modal='hiddenModal4'></image> -->
+      </view>
+    </view>
+  </modal>
+  <modal wx:if="{{hiddenModal5}}" confirm-text="" cancel-text="">
+    <view class='modal_container'>
+      <text>自动取消时间：{{clickItem.autoCancelTime}}</text>
+      <text>快递品牌： {{clickItem.expressType}}</text>
+      <text>赏金：{{clickItem.reward}}元</text>
+      <text>重量：{{clickItem.goodsWeight}}</text>
+      <text>送达地点：{{clickItem.destination}}</text>
+      <text>取货地址：{{clickItem.takeAddress}}</text>
+      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
+      <view class='modal_button'>
+        <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal5'></image>
+        <image src='../../image/cancelOrder_button.png' catchtap='cancelOrder' data-id='{{clickItem.orderId}}' data-state='{{clickItem.orderState}}'></image>
+      </view>
+    </view>
+  </modal>
+  <view class='loadmore_toast' hidden='{{isHiddenLoadMore}}'>
+    已加载全部
+  </view>
+</view>

@@ -1,0 +1,20 @@
+<view class='container'>
+  <form bindsubmit="submit">
+    <view class='block'>
+      <text>手机号</text>
+      <input id='phone' name='phone'  maxlength='11' placeholder='请输入手机号' bindinput='inputChange'></input>
+    </view>
+    <view class='block'>
+      <text>验证码</text>
+      <input name='verifycode' maxlength='4' placeholder='请输入验证码'></input>
+      <button class='getcode' catchtap='getCode' disabled='{{isDisabled}}'>{{bt_content}}</button>
+    </view>
+    <view class='button'>
+      <image src='../../image/binding_button.png'></image>
+      <button formType="submit"></button>
+    </view>
+  </form>
+  <view class='toast' hidden='{{isHiddenToast}}'>
+   发送验证码成功
+  </view>
+</view>

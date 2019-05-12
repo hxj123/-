@@ -1,0 +1,102 @@
+<view class='container'>
+  <scroll-view>
+    <form bindsubmit="formSubmit">
+      <view class='scroll-area'>
+        <view class='div'>
+          <text class='text1' decode="true">学号&nbsp;:&nbsp;&nbsp;</text>
+          <input class='area1' name='stu_id' maxlength='13' type='number'></input>
+        </view>
+        <view class='div'>
+          <text class='text1' decode="true">电话&nbsp;:&nbsp;&nbsp;</text>
+          <input class='area1' name='stu_phone' maxlength='11' type='number'></input>
+        </view>
+        <view class='clothes'>
+          <view class='clothes_header'>
+            <view class='title_area'>
+              <text class='title'>捐赠物品</text>
+            </view>
+            <view class='select' bindtap='selectAllClothes'>
+              <image class='selectImg' src='{{selectImg}}'></image>
+              <text class='selectText'>全选</text>
+            </view>
+          </view>
+          <view class='clothes_select' bindtap='selectClothes'>
+            <image class='selectItem' data-index='0' src='{{clothes[0]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='1' src='{{clothes[1]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='2' src='{{clothes[2]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='3' src='{{clothes[3]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='4' src='{{clothes[4]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='5' src='{{clothes[5]}}' mode='widthFix'></image>
+            <image class='selectItem' data-index='6' src='{{clothes[6]}}' mode='widthFix'></image>
+            <text style='margin-right: 20rpx;'><text style='color:#c2492e'>{{selectCount}}</text>/7</text>
+          </view>
+        </view>
+        <view class='color'>
+          <view class='color_header'>
+            <view class='color_area'>
+              <text class='color_text' decode="true">&nbsp;&nbsp;&nbsp;颜色&nbsp;&nbsp;&nbsp;</text>
+            </view>
+          </view>
+          <view class='color_select' bindtap='selectColor'>
+            <image class='colorItem' src='{{clothesColor[0]}}' mode='widthFix'></image>
+            <image class='colorItem' src='{{clothesColor[1]}}' mode='widthFix'></image>
+          </view>
+        </view>
+        <view class='recovery'>
+          <view class='recovery_header'>
+            <view class='recovery_area'>
+              <text class='recovery_text' decode="true">预约回收</text>
+            </view>
+          </view>
+          <picker mode="date" value="{{date}}" start="2018-07-20" end="2018-07-26" bindchange="bindDateChange">
+            <view class='picker'>
+              <text >回收日期：</text>
+              <view class='picker_value'>
+                <text>{{date}}</text>
+                <image src='../../image/enter.png'></image>
+              </view>
+            </view>
+          </picker>
+          <view style='background:#eee;width:100%;height:1rpx;margin:10px 0;'></view>
+          <picker bindchange="bindPickerChange1" value="{{index}}" range="{{array1}}">
+            <view class='picker'>
+              <text >所在楼宇：</text>
+              <view class='picker_value'>
+                <text>{{array1[index1]}}</text>
+                <image src='../../image/enter.png'></image>
+              </view>
+            </view>
+          </picker>
+          <view style='background:#eee;width:100%;height:1rpx;margin:10px 0;'></view>
+          <picker bindchange="bindPickerChange2" value="{{index}}" range="{{array2}}">
+            <view class='picker'>
+              <text >所在单元：</text>
+              <view class='picker_value'>
+                <text>{{array2[index2]}}</text>
+                <image src='../../image/enter.png'></image>
+              </view>
+            </view>
+          </picker>
+          <view style='background:#eee;width:100%;height:1rpx;margin:10px 0;'></view>
+          <picker bindchange="bindPickerChange3" value="{{index}}" range="{{array3}}">
+            <view class='picker'>
+              <text >所在宿舍：</text>
+              <view class='picker_value'>
+                <text>{{array3[index3]}}</text>
+                <image src='../../image/enter.png'></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class='note'>
+          <image class='selectImg' src='{{noteImg}}' catchtap='noteSelect'></image>
+          <text>我已阅读并同意</text><view style='color:#048eee;font-size: 32rpx' catchtap='showNote'>《捐赠须知》</view>
+        </view>
+        <view class='submit'>
+          <button formType="submit"></button>   
+        </view> 
+        <view style='background:#c2492e;width:100%;height:100rpx'></view>
+      </view>
+    </form>
+  </scroll-view>
+</view>

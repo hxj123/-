@@ -1,0 +1,359 @@
+<!--pages/2hand_trade/2hand_trade.wxml-->
+<wxs module="util" src="../../utils/util.wxs" xmlns:wx="http://www.w3.org/1999/xhtml"
+     xmlns:wx="http://www.w3.org/1999/xhtml" xmlns:wx="http://www.w3.org/1999/xhtml"
+     xmlns:wx="http://www.w3.org/1999/xhtml" xmlns:wx="http://www.w3.org/1999/xhtml"></wxs>
+<view class='container'>
+    <view class="myMask" wx:if="{{showMask}}" bindtap='closeMask' ></view>
+    <view class='tab'>
+        <view id="tab-nav-view" class='tab-header'>
+            <view class="tab-nav">
+                <view class='{{currentTab==0?"on":""}}' data-current="0" bindtap='tab'>我要卖书</view>
+                <view class='{{currentTab==1?"on":""}}' data-current="1" bindtap='tab'>我要买书</view>
+                <view class='{{currentTab==2?"on":""}}' data-current="2" bindtap='tab'>我的订单</view>
+            </view>
+        </view>
+        <swiper class="tab-box" current="{{currentTab}}" bindchange="eventchange">
+            <swiper-item>
+                <scroll-view scroll-y>
+                    <view class="centerColumn">
+                        <view class="book_block">
+                            <picker bindchange="bookTypeChange" value="{{book_type_index}}" range="{{book_type}}">
+                                <view class="book_item">
+                                    <text class="text1">书籍类型<text style="color: #cc492c">*</text></text>
+                                    <view class="picker_value">
+                                        <text class="text2">{{book.type}}</text>
+                                        <image src="../../image/enter.png" />
+                                    </view>
+                                </view>
+                            </picker>
+                        </view>
+                        <view wx:if="{{book.type === '教科类'}}" class="book_block">
+                            <picker bindchange="suitGradeChange" value="{{suit_grade_index}}" range="{{grade_info}}">
+                                <view class="book_item">
+                                    <text class="text1">适用年级<text style="color: #cc492c">*</text></text>
+                                    <view class="picker_value">
+                                        <text class="text2">{{book.suit_grade}}</text>
+                                        <image src="../../image/enter.png"></image>
+                                    </view>
+                                </view>
+                            </picker>
+                        </view>
+                        <view wx:if="{{book.type === '教科类'}}" class="book_block">
+                            <view class="book_item ppw" bindtap="selectCollege">
+                                <text class="text1">适用学院<text style="color: #cc492c">*</text></text>
+                                <view class="picker_value">
+                                    <text wx:if="{{book.suit_college == ''}}" class="text2">点击选择</text>
+                                    <text wx:if="{{book.suit_college != ''}}" class="text2">{{book.suit_college}}</text>
+                                    <image src="../../image/enter.png"></image>
+                                </view>
+                            </view>
+                        </view>
+                        <view wx:if="{{book.type === '教科类'}}" class="book_block">
+                            <view class="book_item">
+                                <text class="text1">适用课程</text>
+                                <input maxlength='20' placeholder="选填" value="{{book.suit_course}}" data-index='suit_course' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">书名<text style="color: #cc492c">*</text></text>
+                                <input maxlength='20' placeholder="必填" value="{{book.book_name}}" data-index='book_name' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">作者<text style="color: #cc492c">*</text></text>
+                                <input maxlength='20' placeholder="必填" value="{{book.author}}" data-index='author' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">出版社</text>
+                                <input maxlength='20' placeholder="选填" value="{{book.press}}" data-index='press' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">成色</text>
+                                <input maxlength='20' placeholder="选填" value="{{book.condition}}" data-index='condition' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class='text1'>定价<text style="color: #cc492c">*</text></text>
+                                <view class='money'>
+                                    <input value="{{book.price}}" type="number" maxlength='3' data-index='price' bindblur="inputChange"/>元
+                                </view>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">联系电话<text style="color: #cc492c">*</text></text>
+                                <input maxlength='20' placeholder="必填" value="{{book.phone}}" data-index='phone' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item ppw-bottom" bindtap="selectTradePlace">
+                                <text class="text1">交易地点<text style="color: #cc492c">*</text></text>
+                                <view class="picker_value">
+                                    <text wx:if="{{book.trade_place == ''}}" class="text2">点击选择</text>
+                                    <text wx:if="{{book.trade_place != ''}}" class="text2">{{book.trade_place}}</text>
+                                    <image src="../../image/enter.png"></image>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="book_item">
+                                <text class="text1">备注</text>
+                                <input maxlength='20' placeholder="选填" value="{{book.remarks}}" data-index='remarks' bindblur="inputChange"/>
+                            </view>
+                        </view>
+                        <view class="book_block">
+                            <view class="weui-uploader">
+                                <view class="weui-uploader__hd">
+                                    <view class="weui-uploader__title">图片上传</view>
+                                </view>
+                                <view class="weui-uploader__bd">
+                                    <block wx:if='{{book.photo !== ""}}'>
+                                        <view class="weui-uploader__file">
+                                            <image class="weui-uploader__img" bindtap='chooseImage' src="{{book.photo}}"></image>
+                                        </view>
+                                    </block>
+                                    <view wx:if="{{book.photo === ''}}" class="weui-uploader__input-box">
+                                        <input class="weui-uploader__input js_file" type="file"
+                                               accept="image/jpg,image/jpeg,image/png,image/gif"
+                                               bindtap='chooseImage' name="images"/>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <image src='../../image/subBook.png' class='button1' mode='widthFix' catchtap='submit'></image>
+                    </view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <view id="search-bar" class="weui-search-bar">
+                    <view class="weui-search-bar__form">
+                        <view class="weui-search-bar__box">
+                            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="search" />
+                            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                                <icon type="clear" size="14"></icon>
+                            </view>
+                        </view>
+                        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                            <icon class="weui-icon-search" type="search" size="14"></icon>
+                            <view class="weui-search-bar__text">搜索</view>
+                        </label>
+                    </view>
+                    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+                    <!-- image class="filter" src="../../image/filter.png"></image -->
+                </view>
+                <scroll-view-refresh id="released-book-list" bind:refresh="refresh" bind:lower="loadmore" lowerThresHold="0">
+                    <view class='centerColumn'>
+                        <view class='book_infos' wx:for-items="{{books_released}}" wx:key="bookId" wx:for-index="bookIndex" data-idx="{{bookIndex}}" catchtap='bookDetail'>
+                            <view class="weui-uploader__file">
+                                <image class="weui-uploader__img" src="{{item.photo}}"></image>
+                            </view>
+                            <view class="left_info">
+                                <view>{{item.bookName}}</view>
+                                <view style='color:#aaa'>{{util.formatBookStr(item)}}</view>
+                                <view class="position centerRow">
+                                    <image src="../../image/weizhi.svg" style="width: 16px; height: 16px; padding-right: 5px"></image>
+                                    <view>{{item.tradePlace}}</view>
+                                </view>
+                            </view>
+                            <view style="float: right;color: #cc492c;font-size: 20px;font-weight: bold;">
+                                ￥{{item.price}}
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-loadmore weui-loadmore_line">
+                        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了</view>
+                    </view>
+                </scroll-view-refresh>
+            </swiper-item>
+            <swiper-item>
+                <view class='my_order_header'>
+                    <view class='{{myCurrentTab==0?"lon":""}}' data-current='0' catchtap='myTab'>我买的书</view>
+                    <view class='{{myCurrentTab==1?"lon":""}}' data-current='1' catchtap='myTab'>我卖的书</view>
+                </view>
+                <view class='my_order_content'>
+                    <scroll-view scroll-y hidden="{{myCurrentTab==1}}">
+                        <view class='tip_block' hidden='{{true}}'>
+                            {{tipBlockContent2}}
+                        </view>
+                        <view class='centerColumn'>
+                            <!-->
+                            <view class='express_order'>
+                                <view class='bookImage' style='background:black'></view>
+                                <view class='info_left'>
+                                    <view><text>就是个测试aaaaaaaaaaaaaaaaaaa</text></view>
+                                    <view style='color:#aaa;font-size:25rpx'><text>书类 出版社 成色<text></view>
+                                    <view style='font-size:22rpx;margin-top:20rpx;'>江安</view>
+                                </view>
+                                <view class='price'>
+                                    <image src='../../image/dispatch_button.png' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+                                    <view>¥80</view>
+                                </view>
+                            </view>
+                            <-->
+                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_accept_list}}' data-index='{{index}}'>
+                                <image class='bookImage' src='{{item.photo}}'></image>
+                                <view class='info_left'>
+                                    <view>{{item.bookName}}</view>
+                                    <view style='color:#aaa;font-size:25rpx'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
+                                    <view style='font-size:22rpx;margin-top:20rpx;'>{{item.tradePlace}}</view>
+                                </view>
+                                <view class='price'>
+                                    <!-->在utils里加了getBookImageUrl函数 只有[已完成]状态<-->
+                                    <image src='/image/已完成.png' style="width:165rpx;" mode='widthFix' catchtap='scan' data-item='{{item}}' data-index='{{index}}'></image>
+                                    <view>¥{{item.price}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <scroll-view scroll-y hidden="{{myCurrentTab==0}}">
+                        <view class='tip_block' hidden='{{isHiddenTipBlock3}}'>
+                            {{tipBlockContent3}}
+                        </view>
+                        <view class='centerColumn'>
+                            <!-->
+                            <view class='express_order'>
+                                <view class='bookImage' style='background:black'></view>
+                                <view class='info_left'>
+                                    <view><text>就是个测试aaaaaaaaaaaaaaaaaaa</text></view>
+                                    <view style='color:#aaa;font-size:25rpx'><text>书类 出版社 成色<text></view>
+                                    <view style='font-size:22rpx;margin-top:20rpx;'>江安</view>
+                                </view>
+                                <view class='price'>
+                                    <image src='../../image/dispatch_button.png' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+                                    <view>¥80</view>
+                                </view>
+                            </view>
+                            <-->
+                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_release_list}}' data-index='{{index}}'>
+                                <image class='bookImage' src='{{item.photo}}'></image>
+                                <view class='info_left'>
+                                    <view>{{item.bookName}}</view>
+                                    <view style='color:#aaa;font-size:25rpx'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
+                                    <view style='font-size:22rpx;margin-top:20rpx;'>{{item.tradePlace}}</view>
+                                </view>
+                                <view class='price'>
+                                    <!-->在utils里加了getBookImageUrl函数 只有[等待中]和[已完成]状态<-->
+                                    <image src='{{item.state==0?"/image/等待中.png":"/image/已完成.png"}}' style="width:165rpx;" mode='widthFix' catchtap='scan' data-item='{{item}}' data-index='{{index}}'></image>
+                                    <view>¥{{item.price}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <modal wx:if='{{hiddenModal1}}' confirm-text='' cancel-text=''>
+            <view class='modal_container'>
+                <text>书籍类型：{{itemClick.bookType}}</text>
+                <text>书名：{{itemClick.bookName}}</text>
+                <text>作者：{{itemClick.author}}</text>
+                <text>出版社：{{itemClick.press}}</text>
+                <text>适用年级：{{itemClick.suitGrade}}</text>
+                <text>适用学院：{{itemClick.suitCollege}}</text>
+                <text>适用课程：{{itemClick.suitCourse}}</text>
+                <text>成色：{{itemClick.book_condition}}</text>
+                <text>定价：{{itemClick.price}}</text>
+                <text>交易地点：{{itemClick.tradePlace}}</text>
+                <view style='display:flex;align-items: center'>
+                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
+                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
+                </view>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks==''?'无':clickItem.remarks}}</text>
+                <view class='modal_button'>
+                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal1'></image>
+                    <image src='../../image/complete_button.png'></image>
+                </view>
+            </view>
+        </modal>
+        <!-->我卖的书的订单详情[已完成]<-->
+        <modal wx:if='{{hiddenModal2}}' confirm-text='' cancel-text=''>
+            <view class='modal_container'>
+                <text>书籍类型：{{itemClick.bookType}}</text>
+                <text>书名：{{itemClick.bookName}}</text>
+                <text>作者：{{itemClick.author}}</text>
+                <text>出版社：{{itemClick.press}}</text>
+                <text>适用年级：{{itemClick.suitGrade}}</text>
+                <text>适用学院：{{itemClick.suitCollege}}</text>
+                <text>适用课程：{{itemClick.suitCourse}}</text>
+                <text>成色：{{itemClick.book_condition}}</text>
+                <text>定价：{{itemClick.price}}</text>
+                <text>交易地点：{{itemClick.tradePlace}}</text>
+                <view style='display:flex;align-items: center'>
+                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
+                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
+                </view>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks==''?'无':clickItem.remarks}}</text>
+                <view class='modal_button'>
+                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal2'></image>
+                    <image src='../../image/complete_button.png'></image>
+                </view>
+            </view>
+        </modal>
+        <!-->我卖的书的订单详情[等待中]<-->
+        <modal wx:if='{{hiddenModal3}}' confirm-text='' cancel-text=''>
+            <view class='modal_container'>
+                <text>书籍类型：{{itemClick.bookType}}</text>
+                <text>书名：{{itemClick.bookName}}</text>
+                <text>作者：{{itemClick.author}}</text>
+                <text>出版社：{{itemClick.press}}</text>
+                <text>适用年级：{{itemClick.suitGrade}}</text>
+                <text>适用学院：{{itemClick.suitCollege}}</text>
+                <text>适用课程：{{itemClick.suitCourse}}</text>
+                <text>成色：{{itemClick.book_condition}}</text>
+                <text>定价：{{itemClick.price}}</text>
+                <text>交易地点：{{itemClick.tradePlace}}</text>
+                <view style='display:flex;align-items: center'>
+                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
+                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
+                </view>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
+                <view class='modal_button'>
+                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal3'></image>
+                    <!--image src='/image/等待中.png' catchtap='scan' data-id='{{itemClick.bookId}}' data-modal='hiddenModal3'></image-->
+                </view>
+            </view>
+        </modal>
+    </view>
+</view>
+
+<view class="{{showSelectCollege? 'ppw-show' : '' }}">
+    <view class="ppw_container">
+        <view style="padding: 40rpx; text-align: left;">
+            <scroll-view scroll-y>
+                <radio-group bindchange="radioChange">
+                    <label class="colleges" wx:for-items="{{college}}" wx:key="*this">
+                        <radio style="padding: 2px 5px" value="{{index}}">{{item}}</radio>
+                    </label>
+                </radio-group>
+                <view style="padding: 20px;" class="button-sp-area">
+                    <button class="weui-btn" type="primary" plain="true" bindtap="closeMask">确 认</button>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+
+<view class="{{showSelectTradePlace? 'ppw-show-bottom' : '' }}">
+    <view class="ppw_container-bottom">
+        <view style="padding: 40rpx; text-align: left;">
+            <scroll-view scroll-y>
+                <checkbox-group bindchange="checkboxChange">
+                    <label class="colleges" wx:for-items="{{trade_places}}" wx:key="*this">
+                        <checkbox style="padding: 2px 5px" value="{{index}}">{{item}}</checkbox>
+                    </label>
+                </checkbox-group>
+                <view style="padding: 20px;" class="button-sp-area">
+                    <button class="weui-btn" type="primary" plain="true" bindtap="closeMask">确 认</button>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

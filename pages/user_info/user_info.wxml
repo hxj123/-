@@ -1,0 +1,37 @@
+<view class='container'>
+  <!-- <view class='func_block'>
+    <view class='block_left'>
+      <image src='../../image/func_icon1.png' mode='widthFix'></image>
+      <open-data type="userNickName"></open-data>
+    </view>
+  </view> -->
+  <view class='func_block' catchtap='toFunc' data-index='1'>
+    <view class='block_left'>
+      <image src='../../image/func_icon5.png' mode='widthFix'></image>
+      <text>{{stuId==''?'绑定学号':stuId}}</text>
+    </view>
+    <image class='enter' src='../../image/enter.png' mode='widthFix'></image>
+  </view>
+  <view class='func_block'  catchtap='toFunc' data-index='2'> 
+    <view class='block_left'>
+      <image src='../../image/func_icon4.png' mode='widthFix'></image>
+      <text>{{phone==''?' 绑定手机':phone}}</text>
+    </view>
+    <image class='enter' src='../../image/enter.png' mode='widthFix'></image>
+  </view>
+  <view class='func_block'>
+    <view class='block_left'>
+      <image src='../../image/func_icon6.png' mode='widthFix'></image>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <radio value="1" checked="{{gender==1}}"/><text decode='{{true}}'>男&nbsp;&nbsp;</text>
+          <radio value="0" checked="{{gender==0}}"/><text decode='{{true}}'>女&nbsp;&nbsp;</text>
+          <!-- <radio value="2" checked="{{false}}"/><text>保密</text> -->
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view style='width:100%;display:flex;justify-content:center;margin-top:30rpx'>
+      <text style='font-size:28rpx;width:88%;'>提示：为了保障您的合法权益，只有当校园卡和手机号全部通过认证后，您才能使用代取快递 / 同校拼车服务</text>
+    </view>
+</view>

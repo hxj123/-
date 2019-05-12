@@ -1,0 +1,92 @@
+  var filters = {
+    getImageUrl: function(state) {
+      var url = ''
+      switch(state){
+        case -1:
+          url = '../../image/fail_button.png'
+          break;
+        case 0:
+          url = '../../image/wait_button.png'
+          break;
+        case 1:
+          url = '../../image/dispatch_button.png'
+          break;
+        case 2:
+          url = '../../image/complete_button.png'
+          break;
+        case 3:
+          url = '../../image/arrive_button.png'
+          break;
+        case 4:
+          url = 'https://jianghuling.top/images/beCanceled_button.png'//
+          break;
+        case 5:
+          url = '../../image/fail_button.png'
+          break;
+      }
+      return url
+  },
+  getReason:function(state){
+    var reason = ''
+    switch(state){
+      case -1:
+        reason = '任务超时未完成'
+        break;
+      case 4:
+        reason = '发单人取消订单'
+        break;
+      case 5:
+        reason = '接单人取消订单'
+        break;
+    }
+    return reason
+  },
+    getBookImageUrl: function(state) {
+      var url = ''
+      switch(state){
+        case 0:
+          url = 'https://jianghuling.top/images/等待中.png'
+          break;
+        case 2:
+          url = 'https://jianghuling.top/images/已完成.png'
+          break;
+        case 4:
+          url = 'https://jianghuling.top/images/beCanceled_button.png'
+          break;
+      }
+      return url
+    },
+  formatString: function(str){
+    return str.length > 8 ? str.substring(0, 8) + '.. ' : str
+  }
+};
+
+function formatBookStr(item) {
+  var attr = "";
+  if(item.bookType !== "") {
+    attr += item.bookType + ", ";
+  }
+  if(item.bookCondition !== null && item.bookCondition !== ""){
+    attr += item.bookCondition + ", ";
+  }
+  if(item.author !== "") {
+    attr += item.author + ", ";
+  }
+  if(item.press !== "") {
+    attr += item.press + ", ";
+  }
+  if(attr.length > 16) {
+    attr = attr.substring(0, 16);
+    attr += "..., ";
+  }
+  return attr.substring(0, attr.length-2);
+}
+
+
+module.exports = {
+  getImageUrl: filters.getImageUrl,
+  getReason: filters.getReason,
+  formatString: filters.formatString,
+  formatBookStr: formatBookStr,
+  getBookImageUrl: filters.getBookImageUrl
+};

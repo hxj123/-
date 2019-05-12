@@ -1,0 +1,16 @@
+<view class='container'>
+  <view class='func_block' bindtap='toFunc' data-index='1'>
+      <view class='block_left'>
+        <image src='../../image/func_icon5.png' mode='widthFix'></image>
+        <text>学号绑定</text>
+      </view>
+      <image class='enter' src='../../image/enter.png' mode='widthFix'></image>
+    </view>
+    <view class='func_block' bindtap='toFunc' data-index='2'>
+      <view class='block_left'>
+        <image src='../../image/func_icon4.png' mode='widthFix'></image>
+        <text>手机号绑定</text>
+      </view>
+      <image class='enter' src='../../image/enter.png' mode='widthFix'></image>
+    </view>
+</view>

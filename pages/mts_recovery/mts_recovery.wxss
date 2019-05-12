@@ -1,0 +1,234 @@
+page{
+  width: 100%;
+  height: 100%;
+}
+
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+scroll-view{
+  width: 100%;
+}
+
+.scroll-area{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+
+.div{
+  width: 92%;
+  background:rgba(200, 200, 200,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+}
+
+.text1{
+  /* font-weight: bold; */
+  font-size: 34rpx;
+}
+
+.area1{
+  vertical-align: center;
+  width: 520rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  background:rgb(250, 250, 250);
+  padding-left: 10rpx;
+  font-size:32rpx;
+}
+
+.clothes{
+  width: 90%;
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.clothes_header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title_area{
+  border: 1px solid black;
+  padding: 5rpx 10rpx; 
+  align-items: flex-start;
+}
+
+.title{
+  padding: 10rpx 20rpx;
+  display:inline-block;
+  background:#c2492e;
+  font-size: 32rpx;
+  color: #fff; 
+}
+
+.select{
+  display: flex;
+  align-items: center;
+}
+
+.selectImg{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.selectText{
+  font-size: 32rpx;
+  color: #666;
+}
+
+.clothes_select{
+  width: 100%;
+  border: 1px solid black;
+  padding: 10rpx 0;
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.selectItem{
+  width: 180rpx;
+  margin: 0 20rpx;
+}
+
+.color{
+  width: 90%;
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.color_header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.color_area{
+  border: 1px solid black;
+  padding: 5rpx 10rpx; 
+  align-items: flex-start;
+}
+
+.color_text{
+  padding: 10rpx 20rpx;
+  display:inline-block;
+  background:#c2492e;
+  font-size: 32rpx;
+  color: #fff; 
+}
+
+.color_select{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clothes_select text{
+  font-size: 32rpx;
+  align-self: flex-end;
+}
+
+.colorItem{
+  width: 320rpx;
+  padding-top: 20rpx;
+}
+
+.note{
+  display: flex;
+  align-items: center; 
+  position: relative;
+  top: 40rpx;
+}
+
+.note text{
+  color: #999;
+  font-size: 32rpx
+}
+
+.recovery{
+  width: 90%;
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recovery_header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.recovery_area{
+  border: 1px solid black;
+  padding: 5rpx 10rpx; 
+  align-items: flex-start;
+}
+
+.recovery_text{
+  padding: 10rpx 20rpx;
+  display:inline-block;
+  background:#c2492e;
+  font-size: 32rpx;
+  color: #fff; 
+}
+
+.picker{
+  width: 660rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 36rpx;
+}
+
+.picker image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.picker_value{
+  display: flex;
+  align-items: center;
+}
+
+.picker_value text{
+  color:#888;
+  font-size: 34rpx;
+}
+
+.submit{
+  width: 250rpx;
+  position: relative;
+  top: 60rpx;
+}
+
+.submit button{
+  background:url(http://39.107.100.204/junxunImg/confirm.png) no-repeat;
+  width:250rpx;
+  height:120rpx;
+  background-size: cover;
+}
+
+button::after{
+  border: none;
+}

@@ -1,0 +1,275 @@
+page{
+  width:100%;
+  height: 100%;
+}
+.banner_swiper{
+  height: 36vh;
+  width: 750rpx;
+}
+.banner_container{
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(245, 245, 245)
+}
+
+.scroll_box{
+width: 100%;
+height: 388rpx;
+overflow: hidden;
+background: #fff;
+white-space: nowrap;
+}
+.scroll-view_x{
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+}
+.s-item{
+      width: 400rpx;
+      height: 320rpx;
+      margin-left: 45rpx;
+      margin-top: 40rpx;
+      display: inline-block;
+    }
+    
+.s-bt{
+  width: 400rpx;
+  height: 320rpx;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main_container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(255, 255, 255)
+}
+
+.func{
+  width: 95%;
+  height: 30%;
+  margin-top: 22rpx; 
+  position: relative;
+}  
+
+.bt{
+  width: 280rpx;
+  height: 88rpx;
+  position: absolute;
+  bottom: 45rpx;
+  right: 60rpx;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bt::after{
+  border: none;
+}
+
+.navigator_hover image{
+  filter: brightness(108%);
+}
+
+.toast{
+  position: absolute;
+  background: #000000;
+  opacity: 0.7;
+  color: white;
+  border-radius: 18px;
+  bottom: 30px;
+  padding: 3px 10px; 
+  font-size: 15px;
+  z-index: 100
+}
+
+.modalStyle{
+  display:flex;
+  align-items: center;
+}
+
+.scorll_container{
+  font-family: 宋体;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.scrolltext{
+  position: relative;
+  background: #f8f8f8;
+}
+
+.marquee_box{
+  margin: 0 25% 0 20%;
+  position: relative;
+  color: #333;
+  height: 30rpx;
+  display: block;
+  overflow: hidden;
+}
+
+.announcement_area{
+  height:20px;
+  display:flex;
+  align-items: center;
+  background: rgb(247, 247, 247)
+}
+
+.announcement{
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  font-size: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-family: 楷体;
+  font-weight: bold;
+}
+
+.marquee_text{
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  height: 60px;
+  line-height: 30rpx;
+  font-family: 宋体;
+}
+
+.announcement_past{
+  right: 2px;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  font-size: 30rpx;
+  height: 14px;
+  line-height: 30rpx;
+  font-family: 楷体;
+  font-weight: bold;
+}
+
+.modal_container{
+  top: 10%;
+  height: 400px;
+  width: 80%;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+}
+.cross_box{
+  position: absolute;
+  border-radius: 20px;
+  right: 0px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  background: #f5f5f5;
+}
+
+.cross{
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  width: 20px;
+  height: 2px;
+  background: black;
+  line-height: 0;
+  font-size: 0;
+  vertical-align: middle;
+  -webkit-transform: rotate(45deg);
+}
+
+.cross:after{
+  content: '/';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: black;
+  -webkit-transform: rotate(-90deg);
+}
+
+.weekday{
+  position: inherit;
+  display: flex;
+  font-family: 宋体;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: 22px;
+}
+
+.weekday_text{
+  width: 15px;
+  font-size: 14px;
+}
+
+.weekday_number{
+  width: 15px;
+  font-size: 14px;
+}
+
+.announcement_board{
+  position: relative;
+  font-family: 楷体;
+  font-weight: bolder;
+  font-size: 44px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.announcement_board_box{
+  margin-top: 20px;
+}
+
+.announcement_board_box:last-child{
+  margin-top: 0px;
+}
+
+.black_bold_line{
+  margin: 0px 5%;
+  background: black;
+  position: absolute;
+  width: 90%;
+  height: 2px;
+}
+
+.announcement_scroll_box{
+  margin-top: 10px;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 180px;
+  overflow: hidden;
+  background:#fff;
+  white-space: nowrap;
+}
+
+.announcement_scroll-view_y{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.announcement_item{
+  font-family: 宋体;
+  font-size: 15px;
+  width: 100%;
+  height: 100%;
+  white-space: normal;
+  word-break: break-all;
+  /* padding: 5px 0; */
+}

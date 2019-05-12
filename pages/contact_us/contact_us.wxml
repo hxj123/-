@@ -1,0 +1,24 @@
+<view class='container'>
+  <view>
+    <image src='https://jianghuling.top/images/feedback_publicQrCode.jpg' style='width:385rpx;height:385rpx;margin-top:28rpx' catchtap='previewImage1'></image>
+  </view>
+  <view>
+    <text>扫二维码关注公众号联系客服</text>
+  </view>
+  <view>
+    <image src='https://jianghuling.top/images/feedback_userQrCode.jpg' style='width:385rpx;height:385rpx' catchtap='previewImage2'></image>
+  </view>
+  <view>
+    <text>扫二维码加入江湖令用户群</text>
+  </view>
+  <view style='display:flex;align-items: center'>
+    <image src='https://jianghuling.top/images/feedback_phone.png' style='width:85rpx;height:85rpx' data-phone='18580691232' catchtap='callPhone'></image>
+  </view>
+  <view>
+    <text>点击按钮拨打客服电话</text>
+  </view>
+  <view>
+    <text>客服QQ：1518996327 微信：cxqjsw6789
+对江湖令有任何疑问或反馈，请随时联系我们</text>
+  </view>
+</view>

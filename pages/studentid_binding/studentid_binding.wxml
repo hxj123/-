@@ -1,0 +1,19 @@
+<view class='container'>
+  <form bindsubmit="submit">
+    <view class='block'>
+      <text>学号</text>
+      <input name='studentid' placeholder='请输入学号'></input>
+    </view>
+    <view class='block'>
+      <text>密码</text>
+      <input name='password' placeholder='请输入密码'></input>
+    </view>
+    <view class='button'>
+      <image src='../../image/binding_button.png'></image>
+      <button formType="submit"></button>
+    </view>
+    <view style='width:100%;display:flex;justify-content:center;margin-top:30rpx'>
+      <text style='font-size:28rpx;width:88%;'>提示：此处的密码是您的教务处密码，我们会通过教务处验证您的真实身份，以保障您和他人的包裹安全</text>
+    </view>
+  </form>
+</view>

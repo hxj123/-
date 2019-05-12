@@ -1,0 +1,47 @@
+page{
+  width: 100%;
+  height: 100%;
+}
+
+image{
+  height: 210px;
+  width: 171px;
+}
+
+.background{
+  height: 100%;
+  width: 100%;
+  background-image: url('https://jianghuling.top/images/feedback_background.jpg');
+  background-size: 100% 38.2%;
+  background-repeat: no-repeat;
+}
+
+.blocks{
+  display: flex;
+  margin-top: 25%;
+  padding: 12rpx;
+}
+
+.block1{
+  position: absolute;
+  left: 5%;
+  top: 25%;
+}
+
+.block2{
+  position: absolute;
+  right: 5%;
+  top: 25%;
+}
+
+.block3{
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+}
+
+.block4{
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+}

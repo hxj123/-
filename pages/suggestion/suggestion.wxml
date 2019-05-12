@@ -1,0 +1,9 @@
+<view class='container'>
+  <form bindsubmit="formSubmit">
+    <view class='title'>
+      <text decode="{{true}}">给平台的建议（200字内）：&emsp;&emsp;&emsp;&emsp;&emsp;</text>
+    </view>
+    <textarea name='comment' maxlength='-1' placeholder="写下你想说的话..." ></textarea>
+    <button formType="submit" hover-class="other-button-hover">提交</button>
+  </form>
+</view>

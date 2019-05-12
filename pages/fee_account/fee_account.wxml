@@ -1,0 +1,13 @@
+<view class='container'>
+  <form bindsubmit='submit'>
+    <view class='block'>
+      <text>支付宝</text>
+      <input id='feeAccount' name='feeAccount' placeholder='请输入账号' bindinput='inputChange'></input>
+    </view>
+    <view class='button'>
+      <image src='../../image/binding_button.png'></image>
+      <button formType="submit"></button>
+    </view>
+    <button catchtap='setFeeAccount' class='button'>设置为手机号</button>
+  </form>
+</view>
