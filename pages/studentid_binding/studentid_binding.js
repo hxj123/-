@@ -15,7 +15,7 @@ Page({
     var studentid = e.detail.value.studentid;
     var password = e.detail.value.password;
     wx.request({
-      url: 'https://jianghuling.top/account/bondStu',
+      url: 'https://jianghuling.xyz/account/bondStu',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

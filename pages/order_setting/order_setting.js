@@ -28,7 +28,7 @@ Page({
       title: '保存中',
     })
     wx.request({
-      url: 'https://jianghuling.top/account/defaultOrderInfo',
+      url: 'https://jianghuling.xyz/account/defaultOrderInfo',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -36,7 +36,7 @@ Page({
       data: {
         secretId: app.globalData.userId,
         name: e.detail.value.defaultName,
-        phone: e.detail.value.defaultPhone, 
+        phone: e.detail.value.defaultPhone,
         destination: e.detail.value.defaultDestination,
         takeAddress: e.detail.value.defaultTakeAddress
       },

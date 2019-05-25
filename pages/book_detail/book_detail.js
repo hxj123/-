@@ -1,6 +1,6 @@
 // pages/book_detail/book_detail.js
 const MAX_IMAGE_HEIGHT = 500;
-const BASE_URL = "https://jianghuling.top/book";
+const BASE_URL = "https://jianghuling.xyz/book";
 const app = getApp();
 Page({
 

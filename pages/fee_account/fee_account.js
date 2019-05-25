@@ -37,7 +37,7 @@ Page({
     }
     var that = this
     wx.request({
-      url: 'https://jianghuling.top/account/bondFeeAccount',
+      url: 'https://jianghuling.xyz/account/bondFeeAccount',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -88,7 +88,7 @@ Page({
     } else {
       var that = this
       wx.request({
-        url: 'https://jianghuling.top/account/bondFeeAccount',
+        url: 'https://jianghuling.xyz/account/bondFeeAccount',
         method: 'POST',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"

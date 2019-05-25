@@ -33,7 +33,7 @@ Page({
       return
     }
     wx.request({
-      url: 'https://jianghuling.top/cst/comment',
+      url: 'https://jianghuling.xyz/cst/comment',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -47,7 +47,7 @@ Page({
           wx.showModal({
             title: '',
             content: '提交成功',
-            showCancel: false,            
+            showCancel: false,
             success: function(){
               wx.navigateBack({
                 delta: 1

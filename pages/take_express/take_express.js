@@ -75,7 +75,7 @@ Page({
       express: express
     });
     wx.request({
-      url: 'https://jianghuling.top/order/getOrderRelease',
+      url: 'https://jianghuling.xyz/order/getOrderRelease',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -108,7 +108,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://jianghuling.top/order/getMyMission',
+      url: 'https://jianghuling.xyz/order/getMyMission',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -140,7 +140,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://jianghuling.top/order/myReleaseOrder',
+      url: 'https://jianghuling.xyz/order/myReleaseOrder',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -348,7 +348,7 @@ Page({
             })
             var bounty = String(Number(data.bounty) * 100)
             wx.request({
-              url: 'https://jianghuling.top/order/issue',
+              url: 'https://jianghuling.xyz/order/issue',
               method: 'POST',
               header: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -420,7 +420,7 @@ Page({
                   }
                 })
                 wx.request({
-                  url: 'https://jianghuling.top/order/myReleaseOrder',
+                  url: 'https://jianghuling.xyz/order/myReleaseOrder',
                   method: 'POST',
                   header: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -489,7 +489,7 @@ Page({
       title: '刷新中'
     })
     wx.request({
-      url: 'https://jianghuling.top/order/getOrderRelease',
+      url: 'https://jianghuling.xyz/order/getOrderRelease',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -558,7 +558,7 @@ Page({
         isHideLoadMore1: false
       }, () => {
         wx.request({
-          url: 'https://jianghuling.top/order/getOrderRelease',
+          url: 'https://jianghuling.xyz/order/getOrderRelease',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -611,7 +611,7 @@ Page({
       title: '刷新中'
     })
     wx.request({
-      url: 'https://jianghuling.top/order/getMyMission',
+      url: 'https://jianghuling.xyz/order/getMyMission',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -680,7 +680,7 @@ Page({
         isHideLoadMore2: false
       }, () => {
         wx.request({
-          url: 'https://jianghuling.top/order/getMyMission',
+          url: 'https://jianghuling.xyz/order/getMyMission',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -734,7 +734,7 @@ Page({
       title: '刷新中'
     })
     wx.request({
-      url: 'https://jianghuling.top/order/myReleaseOrder',
+      url: 'https://jianghuling.xyz/order/myReleaseOrder',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -803,7 +803,7 @@ Page({
         isHideLoadMore3: false
       }, () => {
         wx.request({
-          url: 'https://jianghuling.top/order/myReleaseOrder',
+          url: 'https://jianghuling.xyz/order/myReleaseOrder',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -966,7 +966,7 @@ Page({
           title: '正在接单',
         })
         wx.request({
-          url: 'https://jianghuling.top/order/take',
+          url: 'https://jianghuling.xyz/order/take',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -995,7 +995,7 @@ Page({
                 hasMore2: true
               })
               wx.request({
-                url: 'https://jianghuling.top/order/getMyMission',
+                url: 'https://jianghuling.xyz/order/getMyMission',
                 method: 'POST',
                 header: {
                   "Content-Type": "application/x-www-form-urlencoded"
@@ -1062,7 +1062,7 @@ Page({
       success: function (res) {
         if (!res.confirm) return
         wx.request({
-          url: 'https://jianghuling.top/order/delete',
+          url: 'https://jianghuling.xyz/order/delete',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -1125,7 +1125,7 @@ Page({
       success: function (res) {
         if (!res.confirm) return
         wx.request({
-          url: 'https://jianghuling.top/order/msuccess',
+          url: 'https://jianghuling.xyz/order/msuccess',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -1193,7 +1193,7 @@ Page({
       success: function (res) {
         if (!res.confirm) return
         wx.request({
-          url: 'https://jianghuling.top/order/msuccess',
+          url: 'https://jianghuling.xyz/order/msuccess',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -1237,7 +1237,7 @@ Page({
       success: function (res) {
         if (!res.confirm) return
         wx.request({
-          url: 'https://jianghuling.top/order/cancel',
+          url: 'https://jianghuling.xyz/order/cancel',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -1297,7 +1297,7 @@ Page({
   refund: function (e) {
     var orderId = e.currentTarget.dataset.id
     wx.request({
-      url: 'https://jianghuling.top/pay/payrefund',
+      url: 'https://jianghuling.xyz/pay/payrefund',
       method: 'POST',
       header: {
         "Content-Type": "application/json"

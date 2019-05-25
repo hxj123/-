@@ -9,7 +9,7 @@ Page({
     }
     var reg = new RegExp("\n", "g");
     wx.request({
-      url: 'https://jianghuling.top/cst/carouselNtf',
+      url: 'https://jianghuling.xyz/cst/carouselNtf',
       method: 'GET',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -141,7 +141,7 @@ Page({
 
     if (app.globalData.usageGuide == 0) {
       wx.request({
-        url: 'https://jianghuling.top/account/usage',
+        url: 'https://jianghuling.xyz/account/usage',
         method: 'POST',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -163,7 +163,7 @@ Page({
             url: '../take_express/take_express',
           })
           wx.request({
-            url: 'https://jianghuling.top/account/usage',
+            url: 'https://jianghuling.xyz/account/usage',
             method: 'POST',
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -200,7 +200,7 @@ Page({
     })
     if(app.globalData.usageGuide == 0){
       wx.request({
-        url: 'https://jianghuling.top/account/usage',
+        url: 'https://jianghuling.xyz/account/usage',
         method: 'POST',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"

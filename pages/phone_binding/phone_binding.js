@@ -16,7 +16,7 @@ Page({
   },
   inputChange:function(e){
     this.setData({
-      phone: e.detail.value      
+      phone: e.detail.value
     })
   },
   getCode:function(){
@@ -33,11 +33,11 @@ Page({
     if (!that.data.sendCode) {
       that.setData({
         sendCode: true,
-        isDisabled: true        
+        isDisabled: true
       })
     } else return
     wx.request({
-      url: 'https://jianghuling.top/account/sms',
+      url: 'https://jianghuling.xyz/account/sms',
       method: 'POST',
       header:{
         "Content-Type": "application/x-www-form-urlencoded"
@@ -88,7 +88,7 @@ Page({
     var vCode = e.detail.value.verifycode;
     var that = this
     wx.request({
-      url: 'https://jianghuling.top/account/bondPhone',
+      url: 'https://jianghuling.xyz/account/bondPhone',
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

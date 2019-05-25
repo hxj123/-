@@ -4,7 +4,7 @@ const app = getApp();
 let pageNum = 0;
 let searchPageNum = 0;
 const pageSize = 20;
-const BASE_URL = "https://jianghuling.top/book";
+const BASE_URL = "https://jianghuling.xyz/book";
 
 Page({
   /**
@@ -340,7 +340,7 @@ Page({
     } else if(this.data.currentTab === 2) {
       if(this.data.my_accept_list.length === 0) {
         wx.request({
-          url: 'https://jianghuling.top/book/mybuy',
+          url: BASE_URL + '/mybuy',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -374,7 +374,7 @@ Page({
       }
       if(this.data.my_release_list.length === 0) {
         wx.request({
-          url: 'https://jianghuling.top/book/mysell',
+          url: BASE_URL + '/mysell',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -695,7 +695,7 @@ Page({
       success: function (res) {
         if(!res.confirm) return
         wx.request({
-          url: 'https://jianghuling.top/book/cancel',
+          url: BASE_URL + '/cancel',
           method: 'POST',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"

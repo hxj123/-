@@ -6,7 +6,7 @@ Page({
       success: res => {
         // console.log(res.code)
         wx.request({
-          url: 'https://jianghuling.top/account/login',
+          url: 'https://jianghuling.xyz/account/login',
           data: { jscode: res.code },
           success: function (res) {
             app.globalData.userId = res.data.message

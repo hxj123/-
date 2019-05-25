@@ -15,10 +15,10 @@ Page({
   radioChange: function(e){
     app.globalData.gender = e.detail.value
     wx.request({
-      url: 'https://jianghuling.top/account/gender',
+      url: 'https://jianghuling.xyz/account/gender',
       data: { secretId: app.globalData.userId, gender: e.detail.value },
       success: function (res) {
-        
+
       }
     })
   },
