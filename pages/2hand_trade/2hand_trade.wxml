@@ -13,7 +13,7 @@
             </view>
         </view>
         <swiper class="tab-box" current="{{currentTab}}" bindchange="eventchange">
-            <swiper-item>
+            <swiper-item> 
                 <scroll-view scroll-y>
                     <view class="centerColumn">
                         <view class="book_block">
@@ -180,7 +180,7 @@
                 </view>
                 <view class='my_order_content'>
                     <scroll-view scroll-y hidden="{{myCurrentTab==1}}">
-                        <view class='tip_block' hidden='{{true}}'>
+                        <view class='tip_block' hidden='{{isHiddenTipBlock2}}'>
                             {{tipBlockContent2}}
                         </view>
                         <view class='centerColumn'>
@@ -198,16 +198,19 @@
                                 </view>
                             </view>
                             <-->
-                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_accept_list}}' data-index='{{index}}'>
+                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_accept_list}}' data-index='{{index}}' catchtap='scan' data-item='{{item}}' data-index='{{index}}'>
                                 <image class='bookImage' src='{{item.photo}}'></image>
-                                <view class='info_left'>
+                                <view class='left_info'>
                                     <view>{{item.bookName}}</view>
-                                    <view style='color:#aaa;font-size:25rpx'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
-                                    <view style='font-size:22rpx;margin-top:20rpx;'>{{item.tradePlace}}</view>
+                                    <view style='color:#aaa;'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
+                                    <view class="position centerRow">
+                                        <image src="../../image/weizhi.svg" style="width: 16px; height: 16px; padding-right: 5px"></image>
+                                        <view>{{item.tradePlace}}</view>
+                                    </view>
                                 </view>
                                 <view class='price'>
                                     <!-->在utils里加了getBookImageUrl函数 只有[已完成]状态<-->
-                                    <image src='/image/已完成.png' style="width:165rpx;" mode='widthFix' catchtap='scan' data-item='{{item}}' data-index='{{index}}'></image>
+                                    <image src='/image/已完成.png' style="width:165rpx;" mode='widthFix' ></image>
                                     <view>¥{{item.price}}</view>
                                 </view>
                             </view>
@@ -232,16 +235,19 @@
                                 </view>
                             </view>
                             <-->
-                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_release_list}}' data-index='{{index}}'>
+                            <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_release_list}}' data-index='{{index}}' catchtap='scan' data-item='{{item}}' data-index='{{index}}'>
                                 <image class='bookImage' src='{{item.photo}}'></image>
-                                <view class='info_left'>
+                                <view class='left_info'>
                                     <view>{{item.bookName}}</view>
-                                    <view style='color:#aaa;font-size:25rpx'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
-                                    <view style='font-size:22rpx;margin-top:20rpx;'>{{item.tradePlace}}</view>
+                                    <view style='color:#aaa;'>{{item.bookType}} {{item.press}} {{item.book_condition}}</view>
+                                    <view class="position centerRow">
+                                        <image src="../../image/weizhi.svg" style="width: 16px; height: 16px; padding-right: 5px"></image>
+                                        <view>{{item.tradePlace}}</view>
+                                    </view>
                                 </view>
                                 <view class='price'>
                                     <!-->在utils里加了getBookImageUrl函数 只有[等待中]和[已完成]状态<-->
-                                    <image src='{{item.state==0?"/image/等待中.png":"/image/已完成.png"}}' style="width:165rpx;" mode='widthFix' catchtap='scan' data-item='{{item}}' data-index='{{index}}'></image>
+                                    <image src='{{item.state==0?"/image/等待中.png":"/image/已完成.png"}}' style="width:165rpx;" mode='widthFix'></image>
                                     <view>¥{{item.price}}</view>
                                 </view>
                             </view>
@@ -255,18 +261,18 @@
                 <text>书籍类型：{{itemClick.bookType}}</text>
                 <text>书名：{{itemClick.bookName}}</text>
                 <text>作者：{{itemClick.author}}</text>
-                <text>出版社：{{itemClick.press}}</text>
+                <text>出版社：{{itemClick.press?itemClick.press:'无'}}</text>
                 <text>适用年级：{{itemClick.suitGrade}}</text>
-                <text>适用学院：{{itemClick.suitCollege}}</text>
-                <text>适用课程：{{itemClick.suitCourse}}</text>
-                <text>成色：{{itemClick.book_condition}}</text>
+                <text>适用学院：{{itemClick.suitCollege?itemClick.suitCollege:'无'}}</text>
+                <text>适用课程：{{itemClick.suitCourse?itemClick.suitCourse:'无'}}</text>  
+                <text>成色：{{itemClick.book_condition?itemClick.book_condition:'无'}}</text>
                 <text>定价：{{itemClick.price}}</text>
                 <text>交易地点：{{itemClick.tradePlace}}</text>
                 <view style='display:flex;align-items: center'>
                     <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
                     <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
                 </view>
-                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks==''?'无':clickItem.remarks}}</text>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks?clickItem.remarks:'无'}}</text>
                 <view class='modal_button'>
                     <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal1'></image>
                     <image src='../../image/complete_button.png'></image>
@@ -279,11 +285,11 @@
                 <text>书籍类型：{{itemClick.bookType}}</text>
                 <text>书名：{{itemClick.bookName}}</text>
                 <text>作者：{{itemClick.author}}</text>
-                <text>出版社：{{itemClick.press}}</text>
+                <text>出版社：{{itemClick.press?itemClick.press:'无'}}</text>
                 <text>适用年级：{{itemClick.suitGrade}}</text>
-                <text>适用学院：{{itemClick.suitCollege}}</text>
-                <text>适用课程：{{itemClick.suitCourse}}</text>
-                <text>成色：{{itemClick.book_condition}}</text>
+                <text>适用学院：{{itemClick.suitCollege?itemClick.suitCollege:'无'}}</text>
+                <text>适用课程：{{itemClick.suitCourse?itemClick.suitCourse:'无'}}</text>  
+                <text>成色：{{itemClick.book_condition?itemClick.book_condition:'无'}}</text>
                 <text>定价：{{itemClick.price}}</text>
                 <text>交易地点：{{itemClick.tradePlace}}</text>
                 <view style='display:flex;align-items: center'>
@@ -303,18 +309,18 @@
                 <text>书籍类型：{{itemClick.bookType}}</text>
                 <text>书名：{{itemClick.bookName}}</text>
                 <text>作者：{{itemClick.author}}</text>
-                <text>出版社：{{itemClick.press}}</text>
+                <text>出版社：{{itemClick.press?itemClick.press:'无'}}</text>
                 <text>适用年级：{{itemClick.suitGrade}}</text>
-                <text>适用学院：{{itemClick.suitCollege}}</text>
-                <text>适用课程：{{itemClick.suitCourse}}</text>
-                <text>成色：{{itemClick.book_condition}}</text>
+                <text>适用学院：{{itemClick.suitCollege?itemClick.suitCollege:'无'}}</text>
+                <text>适用课程：{{itemClick.suitCourse?itemClick.suitCourse:'无'}}</text>  
+                <text>成色：{{itemClick.book_condition?itemClick.book_condition:'无'}}</text>
                 <text>定价：{{itemClick.price}}</text>
                 <text>交易地点：{{itemClick.tradePlace}}</text>
                 <view style='display:flex;align-items: center'>
                     <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
                     <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
                 </view>
-                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note?clickItem.note:'无'}}</text>
                 <view class='modal_button'>
                     <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal3'></image>
                     <!--image src='/image/等待中.png' catchtap='scan' data-id='{{itemClick.bookId}}' data-modal='hiddenModal3'></image-->

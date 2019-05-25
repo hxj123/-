@@ -9,7 +9,7 @@ Page({
    */
   data: {
     book: {}
-  },
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
@@ -68,7 +68,7 @@ Page({
                   });
                 } else {
                   wx.showToast({
-                    title: "购买成功",
+                      title: "请前往订单查看卖家联系方式",
                     duration: 1000,
                     mask: true
                   });

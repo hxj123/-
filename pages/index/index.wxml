@@ -35,7 +35,7 @@
           <image id="img1" style='width:100%;height:100%' mode='aspectFit' src="/image/main_bg4.png" hover-class="navigator_hover" catchtap='navigatorTo'></image>
         </view>
         <view class="s-item">
-          <image id="img4" style='width:100%;height:100%' mode='aspectFit' src="https://jianghuling.top/bookimages/43be1c20190510235835.jpg" hover-class="navigator_hover" catchtap='navigatorTo'></image>
+          <image id="img4" style='width:100%;height:100%' mode='aspectFit' src="https://jianghuling.xyz/bookimages/43be1c20190510235835.jpg" hover-class="navigator_hover" catchtap='navigatorTo'></image>
         </view>
 <!--        <view class="s-item">-->
 <!--          <image id="img2" style='width:100%;height:100%' mode='aspectFit' src="/image/main_bg5.png" catchtap='showToast'></image>-->

@@ -8,18 +8,18 @@
             <text class="title">{{book.bookName}}</text>
             <view class="detail">
                 <text>作者：{{book.author}}</text>
-                <text>出版社：{{book.press}}</text>
+                <text>出版社：{{book.press?book.press:'无'}}</text>
                 <text wx:if="{{book.bookType === '教科类'}}">适用年级：{{book.suitGrade}}</text>
-                <text wx:if="{{book.bookType === '教科类'}}">适用学院：{{book.suitCollege}}</text>
-                <text wx:if="{{book.bookType === '教科类'}}">适用课程：{{book.suitCourse}}</text>
+                <text wx:if="{{book.bookType === '教科类'}}">适用学院：{{book.suitCollege?book.suitCollege:'无'}}</text>
+                <text wx:if="{{book.bookType === '教科类'}}">适用课程：{{book.suitCourse?book.suitCourse:'无'}}</text>
             </view>
             <view class="detail condition">
-                <text>成色：{{book.bookCondition}}</text>
+                <text>成色：{{book.bookCondition?book.book_condition:'无'}}</text>
                 <text>交易地点：{{book.tradePlace}}</text>
                 <text wx:if="{{false}}">联系电话：{{book.sellerPhone}}</text>
             </view>
             <view class="detail">
-                <text>*备注：{{book.remarks}}</text>
+                <text>*备注：{{book.remarks?book.remarks:'无'}}</text>
             </view>
         </view>
     </scroll-view>

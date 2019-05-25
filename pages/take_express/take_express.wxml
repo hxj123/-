@@ -143,12 +143,12 @@
               {{tipBlockContent2}}
             </view>
             <view class='centerColumn'>
-              <view wx:key='express_accept' class='express_order' wx:for-item="item" wx:for="{{my_accept_list}}">
+              <view wx:key='express_accept' class='express_order' wx:for-item="item" wx:for="{{my_accept_list}}" bindtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}">
                 <view class='info_left'>
                   <view>{{util.formatString(item.destination)}} {{item.expressType}} {{item.goodsWeight}}</view>
                   <view style='color:#aaa'>{{item.releaseTime}} 发布</view>
                 </view>
-                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix'></image>
               </view>
             </view>
             <view class="weui-loadmore" hidden="{{isHideLoadMore2}}">
@@ -161,12 +161,12 @@
               {{tipBlockContent3}}
             </view>
             <view class='centerColumn'>
-              <view wx:key='express_release' class='express_order' wx:for-item="item" wx:for="{{my_release_list}}" data-index="{{index}}" bindtap=''>
+              <view wx:key='express_release' class='express_order' wx:for-item="item" wx:for="{{my_release_list}}" data-index="{{index}}"  catchtap='releaseButtonClick' data-item='{{item}}' data-index="{{index}}">
                 <view class='info_left'>
                   <view>{{util.formatString(item.destination)}} {{item.expressType}} {{item.goodsWeight}}</view>
                   <view style='color:#aaa'>{{item.releaseTime}} 发布</view>
                 </view>
-                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix' catchtap='releaseButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
+                <image src='{{util.getImageUrl(item.orderState)}}' style="width:165rpx;" mode='widthFix'></image>
               </view>
             </view>
             <view class="weui-loadmore" hidden="{{isHideLoadMore3}}">

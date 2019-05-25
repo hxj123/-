@@ -37,7 +37,6 @@
     font-weight: bold;
 }
 .text-description .detail {
-    color: #aaa;
     display: flex;
     flex-direction: column;
 }
