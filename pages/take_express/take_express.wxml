@@ -104,7 +104,7 @@
               </view>
             </view>
             <view style='width:91%;margin-top:20rpx'><text style='font-size:31rpx;'>*注：1.发布时长：订单发布X小时后若未被接单则自动取消。2.姓名，手机号，取件码只有接单人可见。</text></view>
-            <image src='../../image/button1.png' class='button1' mode='widthFix' catchtap='sumbit'></image>
+            <image src='../../image/button1.png' class='button1' mode='widthFix' catchtap='submit'></image>
           </view>
         </scroll-view>
       </swiper-item>
@@ -185,7 +185,7 @@
       <text>重量：{{clickItem.goodsWeight}}</text>
       <text>送达地点：{{clickItem.destination}}</text>
       <text>取货地址：{{clickItem.takeAddress}}</text>
-      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货时间：{{clickItem.deliveryTime?clickItem.deliveryTime:'无'}}</text>
       <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note}}</text>
       <view class='modal_button'>
         <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal1'></image>
@@ -200,7 +200,7 @@
       <text>赏金：{{clickItem.reward}}元</text>
       <text>送达地点：{{clickItem.destination}}</text>
       <text>取货地址：{{clickItem.takeAddress}}</text>
-      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货时间：{{clickItem.deliveryTime?clickItem.deliveryTime:'无'}}</text>
       <view style='display:flex;align-items: center'>
         <text style='margin-bottom:0px'>联系电话：{{clickItem.hostPhone}}</text>
         <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{clickItem.hostPhone}}' catchtap='callPhone'></image>
@@ -220,7 +220,7 @@
       <text>重量：{{clickItem.goodsWeight}}</text>
       <text>送达地点：{{clickItem.destination}}</text>
       <text>取货地址：{{clickItem.takeAddress}}</text>
-      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货时间：{{clickItem.deliveryTime?clickItem.deliveryTime:'无'}}</text>
       <text>取货码：{{clickItem.goodsCode}}</text>
       <text>取货姓名：{{clickItem.hostName}}</text>
       <view style='display:flex;align-items: center'>
@@ -246,7 +246,7 @@
         <text style='margin-bottom:0px'>接单人电话：{{clickItem.takerPhone}}</text>
         <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{clickItem.takerPhone}}' catchtap='callPhone'></image>
       </view>
-      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货时间：{{clickItem.deliveryTime?clickItem.deliveryTime:'无'}}</text>
       <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
       <view class='modal_button'>
         <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal4'></image>
@@ -263,7 +263,7 @@
       <text>重量：{{clickItem.goodsWeight}}</text>
       <text>送达地点：{{clickItem.destination}}</text>
       <text>取货地址：{{clickItem.takeAddress}}</text>
-      <text>取货时间：{{clickItem.deliveryTime}}</text>
+      <text>取货时间：{{clickItem.deliveryTime?clickItem.deliveryTime:'无'}}</text>
       <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note==''?'无':clickItem.note}}</text>
       <view class='modal_button'>
         <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal5'></image>

@@ -1,7 +1,5 @@
 <!--pages/2hand_trade/2hand_trade.wxml-->
-<wxs module="util" src="../../utils/util.wxs" xmlns:wx="http://www.w3.org/1999/xhtml"
-     xmlns:wx="http://www.w3.org/1999/xhtml" xmlns:wx="http://www.w3.org/1999/xhtml"
-     xmlns:wx="http://www.w3.org/1999/xhtml" xmlns:wx="http://www.w3.org/1999/xhtml"></wxs>
+<wxs module="util" src="../../utils/util.wxs"></wxs>
 <view class='container'>
     <view class="myMask" wx:if="{{showMask}}" bindtap='closeMask' ></view>
     <view class='tab'>
@@ -151,7 +149,7 @@
                 </view>
                 <scroll-view-refresh id="released-book-list" bind:refresh="refresh" bind:lower="loadmore" lowerThresHold="0">
                     <view class='centerColumn'>
-                        <view class='book_infos' wx:for-items="{{books_released}}" wx:key="bookId" wx:for-index="bookIndex" data-idx="{{bookIndex}}" catchtap='bookDetail'>
+                        <view class='book_infos' wx:for-items="{{books_released}}" wx:key="bookId" wx:for-index="bookIndex" data-idx="{{bookIndex}}" catchtap="{{item.state==0?'bookDetail':''}}">
                             <view class="weui-uploader__file">
                                 <image class="weui-uploader__img" src="{{item.photo}}"></image>
                             </view>
@@ -163,8 +161,12 @@
                                     <view>{{item.tradePlace}}</view>
                                 </view>
                             </view>
-                            <view style="float: right;color: #cc492c;font-size: 20px;font-weight: bold;">
+                            <view wx:if='{{item.state==0}}' style="float: right;color: #cc492c;font-size: 20px;font-weight: bold;">
                                 ￥{{item.price}}
+                            </view>
+                            <view wx:else style="float: right;color: #aaa;width:56px;text-align:center">
+                                <view style='font-size: 20px;font-weight: bold;'>￥{{item.price}}</view>
+                                <view style='font-size:13px;'>已出售</view>
                             </view>
                         </view>
                     </view>
@@ -184,20 +186,6 @@
                             {{tipBlockContent2}}
                         </view>
                         <view class='centerColumn'>
-                            <!-->
-                            <view class='express_order'>
-                                <view class='bookImage' style='background:black'></view>
-                                <view class='info_left'>
-                                    <view><text>就是个测试aaaaaaaaaaaaaaaaaaa</text></view>
-                                    <view style='color:#aaa;font-size:25rpx'><text>书类 出版社 成色<text></view>
-                                    <view style='font-size:22rpx;margin-top:20rpx;'>江安</view>
-                                </view>
-                                <view class='price'>
-                                    <image src='../../image/dispatch_button.png' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
-                                    <view>¥80</view>
-                                </view>
-                            </view>
-                            <-->
                             <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_accept_list}}' data-index='{{index}}' catchtap='scan' data-item='{{item}}' data-index='{{index}}'>
                                 <image class='bookImage' src='{{item.photo}}'></image>
                                 <view class='left_info'>
@@ -209,8 +197,7 @@
                                     </view>
                                 </view>
                                 <view class='price'>
-                                    <!-->在utils里加了getBookImageUrl函数 只有[已完成]状态<-->
-                                    <image src='/image/已完成.png' style="width:165rpx;" mode='widthFix' ></image>
+                                    <image src='{{util.getStateImageUrl(item.state)}}' style="width:165rpx;" mode='widthFix'></image>
                                     <view>¥{{item.price}}</view>
                                 </view>
                             </view>
@@ -221,20 +208,6 @@
                             {{tipBlockContent3}}
                         </view>
                         <view class='centerColumn'>
-                            <!-->
-                            <view class='express_order'>
-                                <view class='bookImage' style='background:black'></view>
-                                <view class='info_left'>
-                                    <view><text>就是个测试aaaaaaaaaaaaaaaaaaa</text></view>
-                                    <view style='color:#aaa;font-size:25rpx'><text>书类 出版社 成色<text></view>
-                                    <view style='font-size:22rpx;margin-top:20rpx;'>江安</view>
-                                </view>
-                                <view class='price'>
-                                    <image src='../../image/dispatch_button.png' style="width:165rpx;" mode='widthFix' catchtap='acceptButtonClick' catchtap='acceptButtonClick' data-item='{{item}}' data-index="{{index}}"></image>
-                                    <view>¥80</view>
-                                </view>
-                            </view>
-                            <-->
                             <view wx:key='book_accept' class='express_order' wx:for-item='item' wx:for='{{my_release_list}}' data-index='{{index}}' catchtap='scan' data-item='{{item}}' data-index='{{index}}'>
                                 <image class='bookImage' src='{{item.photo}}'></image>
                                 <view class='left_info'>
@@ -247,7 +220,7 @@
                                 </view>
                                 <view class='price'>
                                     <!-->在utils里加了getBookImageUrl函数 只有[等待中]和[已完成]状态<-->
-                                    <image src='{{item.state==0?"/image/等待中.png":"/image/已完成.png"}}' style="width:165rpx;" mode='widthFix'></image>
+                                    <image src='{{util.getStateImageUrl(item.state)}}' style="width:165rpx;" mode='widthFix'></image>
                                     <view>¥{{item.price}}</view>
                                 </view>
                             </view>
@@ -256,7 +229,7 @@
                 </view>
             </swiper-item>
         </swiper>
-        <modal wx:if='{{hiddenModal1}}' confirm-text='' cancel-text=''>
+        <modal wx:if='{{showModal}}' confirm-text='' cancel-text=''>
             <view class='modal_container'>
                 <text>书籍类型：{{itemClick.bookType}}</text>
                 <text>书名：{{itemClick.bookName}}</text>
@@ -269,67 +242,24 @@
                 <text>定价：{{itemClick.price}}</text>
                 <text>交易地点：{{itemClick.tradePlace}}</text>
                 <view style='display:flex;align-items: center'>
-                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
-                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
+                    <text style='margin-bottom:0px' wx:if='{{myCurrentTab==0}}'>卖家电话：{{itemClick.sellerPhone}}</text>
+                    <text style='margin-bottom:0px' wx:if='{{myCurrentTab==1 && itemClick.buyerPhone != null}}'>买家电话：{{itemClick.buyerPhone}}</text>
+                    <image wx:if='{{myCurrentTab==0 || (myCurrentTab==1 && itemClick.buyerPhone != null)}}' src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.sellerPhone}}' catchtap='callPhone'></image>
                 </view>
-                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks?clickItem.remarks:'无'}}</text>
+                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{itemClick.remarks?itemClick.remarks:'无'}}</text>
                 <view class='modal_button'>
-                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal1'></image>
-                    <image src='../../image/complete_button.png'></image>
-                </view>
-            </view>
-        </modal>
-        <!-->我卖的书的订单详情[已完成]<-->
-        <modal wx:if='{{hiddenModal2}}' confirm-text='' cancel-text=''>
-            <view class='modal_container'>
-                <text>书籍类型：{{itemClick.bookType}}</text>
-                <text>书名：{{itemClick.bookName}}</text>
-                <text>作者：{{itemClick.author}}</text>
-                <text>出版社：{{itemClick.press?itemClick.press:'无'}}</text>
-                <text>适用年级：{{itemClick.suitGrade}}</text>
-                <text>适用学院：{{itemClick.suitCollege?itemClick.suitCollege:'无'}}</text>
-                <text>适用课程：{{itemClick.suitCourse?itemClick.suitCourse:'无'}}</text>  
-                <text>成色：{{itemClick.book_condition?itemClick.book_condition:'无'}}</text>
-                <text>定价：{{itemClick.price}}</text>
-                <text>交易地点：{{itemClick.tradePlace}}</text>
-                <view style='display:flex;align-items: center'>
-                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
-                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
-                </view>
-                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.remarks==''?'无':clickItem.remarks}}</text>
-                <view class='modal_button'>
-                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal2'></image>
-                    <image src='../../image/complete_button.png'></image>
-                </view>
-            </view>
-        </modal>
-        <!-->我卖的书的订单详情[等待中]<-->
-        <modal wx:if='{{hiddenModal3}}' confirm-text='' cancel-text=''>
-            <view class='modal_container'>
-                <text>书籍类型：{{itemClick.bookType}}</text>
-                <text>书名：{{itemClick.bookName}}</text>
-                <text>作者：{{itemClick.author}}</text>
-                <text>出版社：{{itemClick.press?itemClick.press:'无'}}</text>
-                <text>适用年级：{{itemClick.suitGrade}}</text>
-                <text>适用学院：{{itemClick.suitCollege?itemClick.suitCollege:'无'}}</text>
-                <text>适用课程：{{itemClick.suitCourse?itemClick.suitCourse:'无'}}</text>  
-                <text>成色：{{itemClick.book_condition?itemClick.book_condition:'无'}}</text>
-                <text>定价：{{itemClick.price}}</text>
-                <text>交易地点：{{itemClick.tradePlace}}</text>
-                <view style='display:flex;align-items: center'>
-                    <text style='margin-bottom:0px'>联系电话：{{itemClick.phoneNum}}</text>
-                    <image src='../../image/phone.png' style='width:18px;height:18px;margin-left:5px' data-phone='{{itemClick.phoneNum}}' catchtap='callPhone'></image>
-                </view>
-                <text style='margin-top:10px;'><text style='font-weight:bold'>备注：</text>{{clickItem.note?clickItem.note:'无'}}</text>
-                <view class='modal_button'>
-                    <image src='../../image/cancel_button.png' catchtap='cancel' data-modal='hiddenModal3'></image>
-                    <!--image src='/image/等待中.png' catchtap='scan' data-id='{{itemClick.bookId}}' data-modal='hiddenModal3'></image-->
+                    <image src='../../image/cancel.png' catchtap='cancel' data-modal='showModal' mode='widthFix'></image>
+                    <image wx:if='{{myCurrentTab==0 && itemClick.state==7}}' src='../../image/cancel_order.png' catchtap='buyerCancelOrder' mode='widthFix'></image>
+                    <image wx:if='{{myCurrentTab==0 && (itemClick.state==7 || itemClick.state==11)}}' src='../../image/confirm_receive.png' catchtap='confirmAcceptBook' mode='widthFix'></image>
+                    <image wx:if='{{myCurrentTab==1 && itemClick.state==0}}' src='../../image/cancel_order.png' catchtap='sellerCancelOrder' mode='widthFix'></image>
+                    <image wx:if='{{myCurrentTab==1 && itemClick.state==7}}' src='../../image/confirm_deliver.png' catchtap='confirmDeliverBook' mode='widthFix'></image>
+                    <image wx:if='{{itemClick.state==4||itemClick.state==9||itemClick.state==2}}' src='../../image/delete_record.png' catchtap='deleteRecord' mode='widthFix'></image>
                 </view>
             </view>
         </modal>
     </view>
 </view>
-
+s
 <view class="{{showSelectCollege? 'ppw-show' : '' }}">
     <view class="ppw_container">
         <view style="padding: 40rpx; text-align: left;">

@@ -264,7 +264,7 @@ Page({
             [data]: e.detail.value
         })
     },
-    sumbit: function (e) {
+    submit: function (e) {
         var that = this
         console.log(e);
         //console.log("app.globalData.phone :" + app.globalData.phone)
@@ -334,7 +334,11 @@ Page({
                     showCancel: false,
                 })
             } else if (!util.isPoneAvailable(data['phone'])) {
-
+                wx.showModal({
+                    title: '',
+                    content: '请输入正确的手机号',
+                    showCancel: false,
+                })
             } else {
                 console.log("currentIndex:" + that.data.currentIndex)
                 console.log("autoCancelTime[currentIndex]:" + that.data.autoCancelTime[that.data.currentIndex])

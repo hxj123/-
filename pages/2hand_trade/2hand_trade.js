@@ -5,6 +5,7 @@ let pageNum = 0;
 let searchPageNum = 0;
 const pageSize = 20;
 const BASE_URL = "https://jianghuling.xyz/book";
+var searchContent = '';
 
 Page({
     /**
@@ -19,10 +20,7 @@ Page({
         book_list_page: 0,
         accept_list_page: 0,
         release_list_page: 0,
-        hiddenModal: false,
-        hiddenModal1: false,
-        hiddenModal2: false,
-        hiddenModal3: false,
+        showModal: false,
         isHiddenTipBlock2: true,
         isHiddenTipBlock3: true,
         tipBlockContent2: '',
@@ -79,7 +77,7 @@ Page({
                 keyword: that.data.inputVal
             },
             success: (res) => {
-                console.log(res);
+                // console.log(res);
                 const data = res.data;
                 if (data instanceof Array) {
                     const hasMore = !(data.length < pageSize);
@@ -94,7 +92,7 @@ Page({
                     });
                 }
                 else {
-                    console.error(data.status);
+                    // console.error(data.status);
                     wx.showToast({
                         title: "出错了，请稍后再试",
                         icon: "none",
@@ -110,6 +108,11 @@ Page({
     },
 
     loadmore: function () {
+        if(searchContent != ''){
+            searchPageNum++;
+            this.getSearchData();
+            return;
+        }
         const that = this;
         if (this.data.hasMore) {
             wx.request({
@@ -122,10 +125,9 @@ Page({
                 data: {
                     pageNum: pageNum,
                     pageSize: pageSize,
-                    keyword: that.data.inputVal
                 },
                 success: (res) => {
-                    console.log(res);
+                    // console.log(res);
                     const data = res.data;
                     if (data instanceof Array) {
                         const hasMore = !(data.length < pageSize);
@@ -136,13 +138,13 @@ Page({
                                 books_released: d
                             });
                         }
-                        console.log(hasMore);
+                        // console.log(hasMore);
                         that.setData({
                             hasMore: hasMore
                         });
                     }
                     else {
-                        console.error(data.status);
+                        // console.error(data.status);
                         wx.showToast({
                             title: "出错了，请稍后再试",
                             icon: "none",
@@ -251,7 +253,7 @@ Page({
         this.setData({
             [attr]: event.detail.value
         });
-        // console.log(this.data.book);
+        // // console.log(this.data.book);
     },
     chooseImage: function (event) {
         const that = this;
@@ -273,10 +275,12 @@ Page({
         });
     },
     tab: function (event) {
-        changeTab(event.target.dataset.current, this);
+        this.setData({
+            currentTab: event.target.dataset.current
+        });
+        // changeTab(event.target.dataset.current, this);
     },
     eventchange: function (event) {
-        console.log(event);
         const that = this;
         this.setData({
             currentTab: event.detail.current
@@ -296,6 +300,7 @@ Page({
                     title: "加载中...",
                     mask: true,
                     success: (res) => {
+                        console.log(res.data);
                         wx.request({
                             url: BASE_URL + "/getReleasedBook",
                             method: "POST",
@@ -309,7 +314,7 @@ Page({
                                 keyword: that.data.inputVal
                             },
                             success: (res) => {
-                                console.log(res);
+                                // console.log(res);
                                 wx.hideLoading();
                                 const data = res.data;
                                 if (data instanceof Array) {
@@ -323,7 +328,7 @@ Page({
                                     }
                                 }
                                 else {
-                                    console.error(data.status);
+                                    // console.error(data.status);
                                     wx.showToast({
                                         title: "出错了，请稍后再试",
                                         icon: "none",
@@ -384,6 +389,7 @@ Page({
                         pageSize: 15
                     },
                     success: function (res) {
+                        console.log(res.data)
                         if (res.data.length === 0) {
                             that.setData({
                                 tipBlockContent3: '空空如也'
@@ -488,10 +494,10 @@ Page({
             wx.showModal({
                 title: '',
                 content: '确认发布商品？',
-                success: function(res){
+                success: function (res) {
                     if (!res.confirm) return;
                     wx.showLoading({
-                        title: "正在发布，请稍候...",
+                        title: "发布中，请稍候..",
                         mask: true,
                         success: (res) => {
                             const formdata = {
@@ -521,23 +527,23 @@ Page({
                                     const data = JSON.parse(res.data);
                                     if (data.code !== undefined) {
                                         if (parseInt(data.code) === 20) {
-                                            console.log(res);
+                                            // console.log(res);
                                             wx.showToast({
                                                 title: "发布成功",
                                                 duration: 1600,
                                                 mask: false
                                             });
                                         } else {
-                                            console.error(data);
+                                            // console.error(data);
                                             wx.showToast({
-                                                title: "发布失败，错误代码：" + data.code,
+                                                title: "发布失败，请联系管理员或稍后再试",
                                                 icon: "none",
                                                 duration: 2000,
                                                 mask: false
                                             });
                                         }
                                     } else {
-                                        console.error(data);
+                                        // console.error(data);
                                         wx.showToast({
                                             title: "发布失败，错误代码：" + data.status,
                                             icon: "none",
@@ -547,7 +553,7 @@ Page({
                                     }
                                 },
                                 fail: (res) => {
-                                    console.error(res);
+                                    // console.error(res);
                                     wx.showToast({
                                         title: "未知错误",
                                         icon: "none",
@@ -560,7 +566,7 @@ Page({
                     });
                 }
             })
-            
+
         } else {
             wx.showToast({
                 title: info,
@@ -603,7 +609,12 @@ Page({
             inputVal: e.detail.value
         });
     },
-    search: function () {
+    search: function(e){
+        searchPageNum = 0;
+        searchContent = this.data.inputVal;
+        this.getSearchData();
+    },
+    getSearchData: function () {
         const that = this;
         wx.showLoading({
             title: "数据加载中...",
@@ -617,13 +628,11 @@ Page({
                     },
                     dataType: "json",
                     data: {
-                        keyword: this.data.inputVal,
+                        keyword: that.data.inputVal,
                         pageNum: searchPageNum,
                         pageSize: pageSize
                     },
                     success: (res) => {
-                        console.log(res);
-                        searchPageNum++;
                         wx.hideLoading();
                         const data = res.data;
                         if (data.length === 0 || data instanceof Array) {
@@ -674,7 +683,6 @@ Page({
         that.dataset({
             clickItem: item,
             clickItemIndex: index,
-
         })
     },
     callPhone: function (e) {
@@ -687,62 +695,7 @@ Page({
             [e.currentTarget.dataset.modal]: false
         })
     },
-    cancelOrder: function (e) {
-        var that = this
-        var id = e.currentTarget.dataset.id
-        var state = e.currentTarget.dataset.state
-        wx.showModal({
-            title: '',
-            content: '确认删除订单，删除后不再显示？',
-            success: function (res) {
-                if (!res.confirm) return
-                wx.request({
-                    url: BASE_URL + '/cancel',
-                    method: 'POST',
-                    header: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    data: {
-                        secretId: app.globalData.userId,
-                        bookId: id
-                    },
-                    success: function (res) {
-                        that.setData({
-                            hiddenModal3: false
-                        })
-                        if (res.data.code == 20) {
-                            var index = that.data.clickItemIndex
-                            that.data.my_release_list[index].state = 4//修改订单状态
-                            that.setData({
-                                my_release_list: that.data.my_release_list
-                            })
-                            wx.showModal({
-                                title: '取消成功',
-                                content: '',
-                                showCancel: false
-                            })
-                        } else if (res.data.code == 30) {
-                            wx.showModal({
-                                title: '取消失败',
-                                content: '',
-                                showCancel: false
-                            })
-                        }
-                    }
-                })
-            },
-            fail: function () {
-                wx.hideLoading()
-                wx.showModal({
-                    title: '',
-                    content: '操作失败，请检查当前网络连接状态',
-                    showCancel: false,
-                })
-            }
-        })
-    },
     scan: function (e) {
-        console.log(e)
         var that = this
         var item = e.currentTarget.dataset.item
         var index = e.currentTarget.dataset.index
@@ -750,37 +703,301 @@ Page({
             itemClick: item,
             clickItemIndex: index
         })
-        var state = item.state
-        if (state) {
-            that.setData({
-                hiddenModal1: true
-            })
-        } else {
-            switch (state) {
-                case 0:
-                    that.setData({
-                        hiddenModal3: true
+        // var state = item.state;
+        that.setData({
+            showModal: true
+        })
+        // if (state) {
+        //     that.setData({
+        //         hiddenModal1: true
+        //     })
+        // } else {
+        //     switch (state) {
+        //         case 0:
+        //             that.setData({
+        //                 hiddenModal3: true
+        //             })
+        //             break;
+        //         case 2:
+        //             that.setData({
+        //                 hiddenModal2: true
+        //             })
+        //             break;
+        //     }
+        // }
+    },
+    //买家取消
+    buyerCancelOrder:function(e){
+        var that = this
+        var id = this.data.itemClick.id;
+        wx.showModal({
+            title: '',
+            content: '确定取消购买书籍，若确认取消购买，后台稍后会自动将钱转回您的微信账号里',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.showLoading({
+                        title: '请稍等',
                     })
-                    break;
-                case 2:
-                    that.setData({
-                        hiddenModal2: true
+                    wx.request({
+                        url: BASE_URL + '/cancelbuy',
+                        header: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        data: {
+                            secretId: app.globalData.userId,
+                            bookId: id
+                        },
+                        success: function (res) {
+                            wx.hideLoading();
+                            if (res.data.code == 20) {
+                                wx.showModal({
+                                    title: '',
+                                    content: '取消购买成功，稍后钱将返回您的账户里',
+                                    showCancel: false
+                                })
+                                that.data.my_accept_list[that.data.clickItemIndex].state = 9;
+                                that.setData({
+                                    my_accept_list: that.data.my_accept_list,
+                                    showModal: false
+                                })
+                            } else {
+                                wx.showModal({
+                                    title: '',
+                                    content: '操作失败',
+                                    showCancel: false
+                                })
+                            }
+                        },
+                        fail: function () {
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '',
+                                content: '操作失败，请检查网络连接，或联系客服',
+                                showCancel: false
+                            })
+                        }
                     })
-                    break;
+                }
             }
-        }
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    //买家确认收到书籍
+    confirmAcceptBook: function (e) {
+        var that = this
+        var id = this.data.itemClick.id;
+        
+        wx.showModal({
+            title: '',
+            content: '确认已收到书籍？',
+            success: function(res){
+                if(res.confirm){
+                    wx.showLoading({
+                        title: '请稍等',
+                    })
+                    
+                    wx.request({
+                        url: BASE_URL + '/confirmtrade',
+                        method: 'POST',
+                        header: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        data: {
+                            secretId: app.globalData.userId,
+                            bookId: id
+                        },
+                        success: function (res) {
+                            console.log(res.data)
+                            wx.hideLoading();
+                            if(res.data.code == 20){
+                                that.data.my_accept_list[that.data.clickItemIndex].state = 2;
+                                that.setData({
+                                    my_accept_list: that.data.my_accept_list,
+                                    showModal: false
+                                })
+                            } else if (res.data.code == 30){
+                                wx.showModal({
+                                    title: '',
+                                    content: '很抱歉出了点问题，请检查网络连接或联系客服人员'
+                                })
+                            }
+                        },
+                        fail: function(){
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '',
+                                content: '很抱歉出了点问题，请检查网络连接或联系客服人员'
+                            })
+                        }
+                    })
+                }
+            }
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
+    //卖家取消
+    sellerCancelOrder(e){
+        var that = this
+        var id = this.data.itemClick.id;
+        wx.showModal({
+            title: '',
+            content: '确定取消出售书籍？',
+            success: function(res){
+                if(res.confirm){
+                    wx.showLoading({
+                        title: '请稍等',
+                    })
+                    wx.request({
+                        url: BASE_URL +'/cancelsub',
+                        header:{
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        data:{
+                            secretId: app.globalData.userId,
+                            bookId: id
+                        },
+                        success: function(res){
+                            wx.hideLoading();
+                            if(res.data.code == 20){
+                                that.data.my_release_list[that.data.clickItemIndex].state = 4;
+                                that.setData({
+                                    my_release_list: that.data.my_release_list,
+                                    showModal: false
+                                })
+                            }else{
+                                wx.showModal({
+                                    title: '',
+                                    content: '操作失败，请稍后再试，或联系管理员',
+                                    showCancel: false
+                                })
+                            }
+                        },
+                        fail: function(){
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '',
+                                content: '操作失败，请检查网络连接，或联系客服',
+                                showCancel: false
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    },
+    //卖家确认书籍送达
+    confirmDeliverBook(e){
+        var that = this
+        var id = this.data.itemClick.id;
+        wx.showModal({
+            title: '',
+            content: '确认书籍送达？',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.showLoading({
+                        title: '请稍等',
+                    })
+                    wx.request({
+                        url: BASE_URL + '/confirmsend',
+                        header: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        data: {
+                            secretId: app.globalData.userId,
+                            bookId: id
+                        },
+                        success: function (res) {
+                            wx.hideLoading();
+                            if (res.data.code == 20) {
+                                that.data.my_release_list[that.data.clickItemIndex].state = 11;
+                                that.setData({
+                                    my_release_list: that.data.my_release_list,
+                                    showModal: false
+                                })
+                            } else {
+                                wx.showModal({
+                                    title: '',
+                                    content: '操作失败，请稍后再试，或联系管理员',
+                                    showCancel: false
+                                })
+                            }
+                        },
+                        fail: function () {
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '',
+                                content: '操作失败，请检查网络连接，或联系客服',
+                                showCancel: false
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    },
+    //删除记录
+    deleteRecord: function(e){
+        var role = this.data.myCurrentTab==0?1:0;
+        var id = this.data.itemClick.id;
+        var that = this;
+        wx.showModal({
+            title: '',
+            content: '确定要删除记录？删除后将不会在显示此条记录',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.showLoading({
+                        title: '请稍等',
+                    })
+                    wx.request({
+                        url: BASE_URL + '/delete',
+                        header: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        data: {
+                            bookId: id,
+                            role: role
+                        },
+                        success: function (res) {
+                            wx.hideLoading();
+                            if (res.data.code == 20) {
+                                wx.showModal({
+                                    title: '',
+                                    content: '删除成功',
+                                    showCancel: false
+                                })
+                                if(role == 0){
+                                    that.data.my_release_list.splice(that.data.clickItemIndex, 1)
+                                    console.log(that.data.my_release_list)
+                                    that.setData({
+                                        my_release_list: that.data.my_release_list,
+                                        showModal: false
+                                    })
+                                }else{
+                                    that.data.my_accept_list.splice(that.data.clickItemIndex, 1)
+                                    that.setData({
+                                        my_accept_list: that.data.my_accept_list,
+                                        showModal: false
+                                    })
+                                }
+                            } else {
+                                wx.showModal({
+                                    title: '',
+                                    content: '操作失败，请稍后再试，或联系管理员',
+                                    showCancel: false
+                                })
+                            }
+                        },
+                        fail: function () {
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '',
+                                content: '操作失败，请检查网络连接，或联系客服',
+                                showCancel: false
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    },
     onShow: function () {
         if (this.data.boughtSuccess) {
             let books = this.data.books_released;
@@ -794,45 +1011,4 @@ Page({
             }
         }
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
 })
-
-function changeTab(tabNum, t) {
-    t.setData({
-        currentTab: tabNum
-    });
-}
